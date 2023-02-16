@@ -82,25 +82,32 @@ VALUES (1, 'Panhellenic Council'),
 (4, 'Multi-Cultural Greek Council'),
 (5, 'National Pan-Hellenic Council');
 
-INSERT INTO Chapters(`chapter_id`, `chapter_name`, `nickname`, `colors`, `philanthropy`, `housed`, `address`)
-VALUES('Chapter Name 1', 'Chapter Nickname 1', 'Color 1 and Color 2', 'Philanthropy 1', 1, 'Address 1'),
-('Chapter Name 2', 'Chapter Nickname 2', 'Color 3 and Color 4', 'Philanthropy 2', 1, 'Address 2'),
-('Chapter Name 3', 'Chapter Nickname 3', 'Color 5 and Color 6', 'Philanthropy 3', 1, 'Address 3');
+INSERT INTO Chapters(`chapter_id`, `chapter_name`, `nickname`, `colors`, `philanthropy`, `housed`, `address`, `council_id`)
+VALUES(001, 'Delta Gamma', 'Dee Gee', 'Bronze, Pink, Blue', 'Service for Sight', 1, '715 NW 23rd St', 1),
+(002, 'Kappa Alpha Theta', 'Theta', 'Gold, Black', 'Court Appointed Special Advocates', 1, '465 NW 23rd St', 1),
+(012, 'Pi Kappa Phi', 'Pi Kapp', 'White, Gold, Royal Blue', 'The Ability Experience', 1, '2111 NW Harrison Blvd', 2),
+(023, 'Sigma Delta Omega', 'SDO', 'N/A', 'OSU Stem Academy', 0, NULL, 3);
 
-INSERT INTO Members(`first_name`, `last_name`, `address`, `email_address`, `major`)
-VALUES('First name 1', 'Last name 1', NULL, NULL, 'Major 1'),
-('First name 2', 'Last name 2', NULL, NULL, NULL),
-('First name 3', 'Last name 3', NULL, NULL, 'Major 3');
+INSERT INTO Members(`member_id`, `first_name`, `last_name`, `address`, `email_address`, `major`, `chapter_id`)
+VALUES(0001, 'Abby', 'Ruff', '2454 NW Jackson Ave', 'abbyruff078@comcast.net', 'Marketing', 001),
+(0123, 'Kaylee', 'Eichorn', '465 NW 23rd St', 'eichornk@oregonstate.edu', 'Computer Science', 002),
+(0254, 'Jake', 'Lyda', '4768 SE Harrison Blvd', 'lydaj@icloud.com', 'Business Administration' 003);
 
-INSERT INTO Positions(`position_name`, `position_responsibility`)
-VALUES('Position 1', 'Position 1 description'),
-('Position 2', 'Position 2 description'),
-('Position 3', 'Position 3 description');
+INSERT INTO Positions(`position_id`, `position_name`, `position_responsibility`, `member_id`)
+VALUES(01, 'President', 'Leads formal chapter and manages all chapter members', 0001),
+(02, 'Recruitment Director', 'Helps recruit more members for the chapter during Fall Formal Recruitment and COB', 0254),
+(07, 'External Philanthropy', 'Engages the chapter in other chapters philanthropies', 0123),
+(08, 'Internal Philanthropy', 'Plans their chapter philanthropy events', 0311);
 
-INSERT INTO Philanthropy_Events(`event_name`, `event_type`)
-VALUES('Event name 1', 'Event type 1'),
-('Event name 2', 'Event type 2'),
-('Event name 3', 'Event type 3');
+INSERT INTO Philanthropy_Events(`event_id`, `event_name`, `event_type`, `event_entry`, `event_status`)
+VALUES(003, 'Anchorsplash', 'Synchronized Swimming', 150, 'Inactive'),
+(024, 'Ironbrawl', 'Flag Football', 100, 'Inactive'),
+(031, 'SPE Sweetheartds', 'Pageant', 75, 'Active');
+
+INSERT INTO Chapter_Philanthropies(`philanthropy_id`, `philanthropy_role`, `event_id`, `chapter_id`)
+VALUES(1005, 'Host', 024, 002),
+(1005, 'Participating', 024, 012),
+(1023, 'Host', 003, 001);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
