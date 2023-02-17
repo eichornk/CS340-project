@@ -30,7 +30,6 @@ CREATE TABLE Chapters (
     housed bool NOT NULL,
     address varchar(255),
     council_id int NOT NULL,
-    event_id int NOT NULL,
     PRIMARY KEY (chapter_id),
     FOREIGN KEY (council_id) REFERENCES Councils(council_id) ON DELETE CASCADE
 );
@@ -71,16 +70,16 @@ CREATE TABLE Philanthropy_Events (
 --Intersection table structure for 'Chapter Philanthropies'
 CREATE TABLE Chapter_Philanthropies (
     chapter_philanthropy_id int NOT NULL UNIQUE AUTO_INCREMENT,
-    philanthropy_role varchar NOT NULL,
+    philanthropy_role varchar(255) NOT NULL,
     event_id int NOT NULL,
     chapter_id int NOT NULL,
-    PRIMARY KEY (philanthropy_id),
+    PRIMARY KEY (chapter_philanthropy_id),
     FOREIGN KEY (event_id) REFERENCES Philanthropy_Events(event_id) ON DELETE CASCADE,
     FOREIGN KEY (chapter_id) REFERENCES Chapters(chapter_id) ON DELETE CASCADE
 );
 
 --Inserts data into 'Councils'
-INSERT INTO Councils(`council_id`, `council_name`) 
+INSERT INTO Councils(council_id, council_name) 
 VALUES (1, 'Panhellenic Council'),
 (2, 'Interfraternity Council'),
 (3, 'Collective Greek Council'),
@@ -88,36 +87,42 @@ VALUES (1, 'Panhellenic Council'),
 (5, 'National Pan-Hellenic Council');
 
 --Inserts data into 'Chapters'
-INSERT INTO Chapters(`chapter_id`, `chapter_name`, `nickname`, `colors`, `philanthropy`, `housed`, `address`, `council_id`)
+INSERT INTO Chapters(chapter_id, chapter_name, nickname, colors, philanthropy, housed, address, council_id)
 VALUES(001, 'Delta Gamma', 'Dee Gee', 'Bronze, Pink, Blue', 'Service for Sight', 1, '715 NW 23rd St', 1),
 (002, 'Kappa Alpha Theta', 'Theta', 'Gold, Black', 'Court Appointed Special Advocates', 1, '465 NW 23rd St', 1),
 (012, 'Pi Kappa Phi', 'Pi Kapp', 'White, Gold, Royal Blue', 'The Ability Experience', 1, '2111 NW Harrison Blvd', 2),
 (023, 'Sigma Delta Omega', 'SDO', 'N/A', 'OSU Stem Academy', 0, NULL, 3);
 
 --Inserts data into 'Members'
-INSERT INTO Members(`member_id`, `first_name`, `last_name`, `address`, `email_address`, `major`, `chapter_id`)
+INSERT INTO Members(member_id, first_name, last_name, address, email_address, major, chapter_id)
 VALUES(0001, 'Abby', 'Ruff', '2454 NW Jackson Ave', 'abbyruff078@comcast.net', 'Marketing', 001),
 (0123, 'Kaylee', 'Eichorn', '465 NW 23rd St', 'eichornk@oregonstate.edu', 'Computer Science', 002),
-(0254, 'Jake', 'Lyda', '4768 SE Harrison Blvd', 'lydaj@icloud.com', 'Business Administration' 003);
+(0254, 'Jake', 'Lyda', '4768 SE Harrison Blvd', 'lydaj@icloud.com', 'Business Administration', 012);
 
 --Inserts data into 'Positions'
-INSERT INTO Positions(`position_id`, `position_name`, `position_responsibility`, `member_id`)
+INSERT INTO Positions(position_id, position_name, position_responsibility, member_id)
 VALUES(01, 'President', 'Leads formal chapter and manages all chapter members', 0001),
 (02, 'Recruitment Director', 'Helps recruit more members for the chapter during Fall Formal Recruitment and COB', 0254),
 (07, 'External Philanthropy', 'Engages the chapter in other chapters philanthropies', 0123),
 (08, 'Internal Philanthropy', 'Plans their chapter philanthropy events', 0311);
 
 --Inserts data into 'Philanthropy_Events'
-INSERT INTO Philanthropy_Events(`event_id`, `event_name`, `event_type`, `event_entry`, `event_status`)
+INSERT INTO Philanthropy_Events(event_id, event_name, event_type, event_entry, event_status)
 VALUES(003, 'Anchorsplash', 'Synchronized Swimming', 150, 'Inactive'),
 (024, 'Ironbrawl', 'Flag Football', 100, 'Inactive'),
-(031, 'SPE Sweetheartds', 'Pageant', 75, 'Active');
+(031, 'SPE Sweethearts', 'Pageant', 75, 'Active');
 
 --Inserts data into 'Chapter_Philanthropies'
-INSERT INTO Chapter_Philanthropies(`chapter_philanthropy_id`, `philanthropy_role`, `event_id`, `chapter_id`)
-VALUES(1005, 'Host', 024, 002),
+INSERT INTO Chapter_Philanthropies(chapter_philanthropy_id, philanthropy_role, event_id, chapter_id)
+VALUES(1015, 'Host', 024, 002),
 (1005, 'Participating', 024, 012),
 (1023, 'Host', 003, 001);
 
+SELECT * FROM Councils;
+SELECT * FROM Chapters;
+SELECT * FROM Members;
+SELECT * FROM Positions;
+SELECT * FROM Philanthropy_Events;
+SELECT * FROM Chapter_Philanthropies;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
