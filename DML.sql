@@ -23,10 +23,12 @@ SELECT chapter_id, chapter_name FROM Chapters;
 INSERT INTO Members(first_name, last_name, address, email_address, major, chapter_id)
 VALUES(:first_nameInput, :last_nameInput, :addressInput, :email_addressInput, :majorInput, :chapter_id_from_dropdown_Input);
 
---Query for reading member information
+--Query for reading member information in dynamic search bar
 SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS chapter_id 
 FROM Members
-INNER JOIN Chapters ON chapter_id = Chapters.chapter_id;
+INNER JOIN Chapters ON chapter_id = Chapters.chapter_id
+WHERE first_name OR last_name LIKE :%searchbarnameInput;
+
 
 --Query for updating member information
 SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS chapter_id 
@@ -50,6 +52,17 @@ SELECT position_id, position_name, position_responsibility, Members.first_name A
 FROM Positions
 INNER JOIN Members ON member_id = Members.member_id;
 
+--Query for updating position information
+SELECT position_id, position_name, position_responsibility, Members.member_id
+    FROM Positions
+    WHERE position_id = :position_ID_selection_from_page;
+UPDATE Positions
+    SET position_name = :position_nameInput, position_responsibility= :position_responsibilityInput, member_id = :member_id_from_dropdown_Input
+    WHERE position_id= :position_ID_from_the_update_form;
+
+--Query for deleting position information
+DELETE FROM Positions WHERE position_id = :position_ID_selection_from_page
+
 --------Philanthropy_Events-------- 
 --Query for adding a philanthropy event
 INSERT INTO Philanthropy_Events(event_name, event_type, event_entry, event_status)
@@ -58,7 +71,18 @@ VALUES(:event_nameInput, :event_typeInput, :event_entryInput, event_statusInput)
 --Query for reading event information
 SELECT * FROM Philanthropy_Events;
 
---------Chapter_Philanthropies-------- (will add, read, delete, update)
+--Query for updating philanthropy event information
+SELECT event_id, event_name, event_type, event_entry, event_status
+    FROM Philanthropy_Events
+    WHERE event_id = :event_ID_selection_from_page;
+UPDATE Philanthropy_Events
+    SET event_name = :event_nameInput, event_type= :event_typeInput, event_entry = :event_entryInput, event_status = :event_status_Input_from_dropdown
+    WHERE event_id= :event_ID_from_the_update_form;
+
+--Query for deleting philanthropy event
+DELETE FROM Philanthropy_Events WHERE event_id = :event_ID_selection_from_page
+
+--------Chapter_Philanthropies--------
 --Query for adding a chapter to a philanthropy event
 SELECT chapter_id, chapter_name FROM Chapters;
 SELECT event_id, event_name FROM Philanthropy_Events;

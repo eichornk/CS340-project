@@ -71,8 +71,8 @@ CREATE TABLE Philanthropy_Events (
 CREATE TABLE Chapter_Philanthropies (
     chapter_philanthropy_id int NOT NULL UNIQUE AUTO_INCREMENT,
     philanthropy_role varchar(255) NOT NULL,
-    event_id int NOT NULL,
-    chapter_id int NOT NULL,
+    event_id int,
+    chapter_id int,
     PRIMARY KEY (chapter_philanthropy_id),
     FOREIGN KEY (event_id) REFERENCES Philanthropy_Events(event_id) ON DELETE CASCADE,
     FOREIGN KEY (chapter_id) REFERENCES Chapters(chapter_id) ON DELETE CASCADE
