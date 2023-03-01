@@ -7,7 +7,7 @@ var app     = express();            // We need to instantiate an express object 
 PORT        = 4215;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
-var db = require('./db-connector')
+var db = require('./database/db-connector')
 
 /*
     ROUTES
