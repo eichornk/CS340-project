@@ -118,11 +118,5 @@ VALUES(1015, 'Host', 024, 002),
 (1005, 'Participating', 024, 012),
 (1023, 'Host', 003, 001);
 
-SELECT * FROM Councils;
-SELECT * FROM Chapters;
-SELECT * FROM Members;
-SELECT * FROM Positions;
-SELECT * FROM Philanthropy_Events;
-SELECT * FROM Chapter_Philanthropies;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
