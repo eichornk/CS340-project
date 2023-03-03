@@ -24,6 +24,8 @@
     "express": "^4.18.2",
     "express-handlebars": "^7.0.1",
     "forever": "^4.0.3",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "react-engine": "^4.5.1",
+    "transform": "^1.1.2"
   }
 }
