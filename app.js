@@ -41,7 +41,7 @@ app.post('/add-chapter-philanthropy-ajax', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     // Create the query and run it on the database
-    query1 = `INSERT INTO Chapter_Philanthropies (chapter_philanthropy_id, philanthropy_role, event_id, chapter_id) VALUES ('${data.chapter_philanthropy_id}', '${data.philanthropy_role}', ${data.event_id}, ${data.chapter_id})`;
+    query1 = `INSERT INTO Chapter_Philanthropies (philanthropy_role, event_id, chapter_id) VALUES ('${data.philanthropy_role}', ${data.event_id}, ${data.chapter_id})`;
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
