@@ -28,10 +28,10 @@ app.get('/', function(req, res)
     res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
 });                                         // will process this file, before sending the finished HTML to the client.
 //Function Reads Chapter Philanthropies table
-app.get('/chapterphilos', function (req, res) {
+app.get('/chapterphilo', function (req, res) {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
     db.pool.query(query1, function (error, rows, fields) {
-        res.render('chapter_philanthropies', { data: rows });
+        res.render('Chapter_Philanthropies', { data: rows });
     })
 });
 
