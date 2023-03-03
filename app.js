@@ -2,14 +2,12 @@
 // Date: 3/2/2023
 // Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 /*
     SETUP for a simple web app 
 */
+
 // Express
-const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 var express = require('express');   // We are using the express library for the web server
 var app     = express(); 
 app.use(express.json())
@@ -20,6 +18,12 @@ PORT        = 65062;                 // Set a port number at the top so it's eas
 // Database
 var db = require('./database/db-connector')
 
+// Handlebars
+const { engine } = require('express-handlebars');
+var exphbs = require('express-handlebars');     // Import express-handlebars
+app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+
 /*
     ROUTES
 */
@@ -27,6 +31,7 @@ app.get('/', function(req, res)
 {
     res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
 });                                         // will process this file, before sending the finished HTML to the client.
+
 //Function Reads Chapter Philanthropies table
 app.get('/chapterphilo', function (req, res) {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
