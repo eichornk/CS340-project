@@ -22,10 +22,16 @@ PORT        = 65062;                                        // Set a port number
 var db = require('./database/db-connector')
 
 // Handlebars
+var exphbs = require('express-handlebars'); 
 const { engine } = require('express-handlebars');
+<<<<<<< HEAD
 var exphbs = require('express-handlebars');                 // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));              // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                             // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+=======
+app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+>>>>>>> e0f6b10f25e6b2e2b150526355bc5103c5fb0552
 
 /*
     ROUTES
