@@ -38,5 +38,32 @@ Citation for the following code:
         </tr>
         {{/each}}
     </tbody>
-    
+
 </table>
+
+{{!-- Form to add a record to the table using AJAX --}}
+
+<h2>Adding a New Chapter Philanthropy with AJAX</h2>
+<p>To add a new chapter philanthropy, please enter their information below and click 'Submit'!</p>
+
+<form id="add-chapter-philanthropy-form-ajax" method="POST" action="/add_chapterphilo-ajax">
+    
+    <label for="input-philanthropy-role">Philanthropy Role: </label>
+    <input type="text" name="input-philanthropy-role" id="input-philanthropy-role">
+
+    <label for="input-event-id">Event ID: </label>
+    <input type="number" name="input-event-id" id="input-event-id">
+
+    <label for="input-chapter-id">Chapter ID: </label>
+    <input type="number" name="input-chapter-id" id="input-chapter-id">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_chapterphilo.js"></script>
+
+
+{{!-- Not implemented yet --}}
+<script src="./js/delete_chapterphilo.js"></script>
+<script src="./js/update_chapterphilo.js"></script>
