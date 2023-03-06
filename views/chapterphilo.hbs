@@ -1,7 +1,12 @@
-// Citation for the following code:
+{{!--
+Citation for the following code:
 // Date: 3/2/2023
 // Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+<h1>The server is running!</h1>
+<p>If you see this text, the server is <strong>definitely</strong> working!</p>
 
 {{!-- Create a table --}}
 <table>
@@ -33,25 +38,5 @@
         </tr>
         {{/each}}
     </tbody>
-</table>
-{{!-- Form to add a record to the table using AJAX --}}
-<h2>Adding a New Chapter Philanthropy with AJAX</h2>
-<p>To add a new chapter philanthropy, please enter their information below and click 'Submit'!</p>
-<form id="add-chapter-philanthropy-form-ajax">
     
-    <label for="input-philanthropy-role">Philanthropy Role: </label>
-    <input type="text" name="input-philanthropy-role" id="input-philanthropy-role">
-
-    <label for="input-event-id">Event Id: </label>
-    <input type="number" name="input-event-id" id="input-event-id">
-
-    <label for="input-chapter-id">Chapter Id: </label>
-    <input type="number" name="input-chapter-id" id="input-chapter-id">
-
-    <input type="submit">
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_chapterphilo.js"></script>
-<script src="./js/delete_chapterphilo.js"></script>
-<script src="./js/update_chapterphilo.js"></script>
+</table>
