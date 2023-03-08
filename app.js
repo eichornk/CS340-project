@@ -114,6 +114,41 @@ app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
                   })
               }
   })});
+
+  app.put('/put-chapterphilo-ajax', function(req,res,next){
+    let data = req.body;
+  
+    let chapter = parseInt(data.chapter_id);
+    let chapter_philanthropy = parseInt(data.chapter_philanthropy_id);
+  
+    let queryUpdateChapterPhilanthropy = `UPDATE Chapter_Philanthropies SET chapter_id = ? WHERE Chapter_Philanthropies.chapter_philanthropies_id = ?`;
+    let selectChapter = `SELECT * FROM Chapters WHERE chapter_id = ?`
+  
+          // Run the 1st query
+          db.pool.query(queryUpdateChapterPhilanthropy, [chapter, chapter_philanthropy], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectChapter, [chapter], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
   
 
 // Route to chapters ---------------------------------------------------------------------------------------------------

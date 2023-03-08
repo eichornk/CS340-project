@@ -78,7 +78,7 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    l//et ChapterPhiloIdCell = document.createElement("TD");
+    //let ChapterPhiloIdCell = document.createElement("TD");
     let PhilanthropyRoleCell = document.createElement("TD");
     let EventIdCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
@@ -102,7 +102,16 @@ addRowToTable = (data) => {
     row.appendChild(EventIdCell);
     row.appendChild(ChapterIdCell);
     row.appendChild(deleteCell);
+
+    row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
-    currentTable.appendChild(row); 
+    currentTable.appendChild(row);
+     // Find drop down menu, create a new option, fill data in the option (id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    let selectMenu = document.getElementById("mySelect");
+    let option = document.createElement("option");
+    option.text = newRow.chapter_philanthropy_id;
+    option.value = newRow.chapter_id + ' - ' + newRow.chapter_name;
+    selectMenu.add(option); 
 }
