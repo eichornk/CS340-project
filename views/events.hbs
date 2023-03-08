@@ -34,7 +34,7 @@
             <td>{{this.event_type}}</td>
             <td>{{this.event_entry}}</td>
             <td>{{this.event_status}}</td>
-             <td><button onclick="deleteEvents({{this.event_id}})">Delete</button></td>
+             <td><button onclick="deleteEvents('{{this.event_id}}')">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
