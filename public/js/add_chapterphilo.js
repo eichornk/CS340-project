@@ -78,10 +78,11 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    l//et ChapterPhiloIdCell = document.createElement("TD");
+    //let ChapterPhiloIdCell = document.createElement("TD");
     let PhilanthropyRoleCell = document.createElement("TD");
     let EventIdCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     //ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
@@ -89,12 +90,28 @@ addRowToTable = (data) => {
     EventIdCell.innerText = newRow.event_id;
     ChapterIdCell.innerText = newRow.chapter_id;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteChapterPhilanthropies(newRow.id);
+    };
+
     // Add the cells to the row 
     //row.appendChild(ChapterPhiloIdCell);
     row.appendChild(PhilanthropyRoleCell);
     row.appendChild(EventIdCell);
     row.appendChild(ChapterIdCell);
+    row.appendChild(deleteCell);
+
+    row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
-    currentTable.appendChild(row); 
+    currentTable.appendChild(row);
+     // Find drop down menu, create a new option, fill data in the option (id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    let selectMenu = document.getElementById("mySelect");
+    let option = document.createElement("option");
+    option.text = newRow.chapter_philanthropy_id;
+    option.value = newRow.chapter_id + ' - ' + newRow.chapter_name;
+    selectMenu.add(option); 
 }

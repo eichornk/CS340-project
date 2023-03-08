@@ -5,10 +5,20 @@ Citation for the following code:
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 --}}
 
+<<<<<<< HEAD
 <h1> Chapter Philanthropies </h1>
+=======
+<h1>GO GREEK</h1>
+<p>All things Fraternity and Sorority Life at Oregon State University!</p>
+<a href="/">Home</a> | <a href="/councils">Councils</a> |
+<a href="/chapters">Chapters</a> | <a href="/members">Members</a> |
+<a href="/positions">Positions</a> | <a href="/events">Events</a> |
+<a href="/chapterphilo">Chapter Philanthropies </a>
+<h3> Chapter Philanthropies </h3>
+>>>>>>> 443e8d817214282f543c44cc99f7f6a78a5f2213
 
 {{!-- Create a table --}}
-<table>
+<table id="chapter-philanthropies-table">
 
     {{!-- Header section --}}
     <thead>
@@ -21,6 +31,7 @@ Citation for the following code:
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
@@ -29,20 +40,20 @@ Citation for the following code:
 
         {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.chapter_philanthropy_id}}>
             <td>{{this.chapter_philanthropy_id}}</td>
             <td>{{this.philanthropy_role}}</td>
             <td>{{this.event_id}}</td>
             <td>{{this.chapter_id}}</td>
+             <td><button onclick="deleteChapterPhilanthropies({{this.chapter_philanthropy_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
-
 </table>
 
 {{!-- Form to add a record to the table using AJAX --}}
 
-<h2>Adding a New Chapter Philanthropy with AJAX</h2>
+<h2>Adding a New Chapter Philanthropy</h2>
 <p>To add a new chapter philanthropy, please enter their information below and click 'Submit'!</p>
 
 <form id="add-chapter-philanthropy-form-ajax">
@@ -59,10 +70,30 @@ Citation for the following code:
     <input type="submit">
 </form>
 
+<h2>Updating A Chapter Philanthropy</h2>
+<p>To update a specific chapter's involvement select their chapter philanthropy id from the drop-down menu on the left and the chapter from the drop-down menu on the right</p>
+<form id="update-chapter-philanthropy-form-ajax">
+
+    <label for="input-chapter-philanthropy-id">Chapter Philanthropy ID: </label>
+    <select name="input-chapter-philanthropy-id" id="mySelect">
+        <option value="test">Select Chapter Philanthropy ID</option>
+        {{#each data}}
+        <option value="{{this.chapter_philanthropy_id}}">{{this.chapter_philanthropy_id}} </option>
+        {{/each}}
+    </select>
+
+    <label for="input-chapter-id">Chapter ID: </label>
+    <select name="input-chapter-id" id="input-chapter-id-update">
+        <option>Select Chapter</option>
+        {{#each chapters}}
+        <option value="{{this.chapter_id}}">{{this.chapter_id}} {{this.chapter_name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_chapterphilo.js"></script>
-
-
-{{!-- Not implemented yet --}}
 <script src="./js/delete_chapterphilo.js"></script>
 <script src="./js/update_chapterphilo.js"></script>
