@@ -34,7 +34,8 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-chapter-philanthropy-ajax", true);
+    // xhttp.open("POST", "/add-chapter-philanthropy-ajax", true);
+    xhttp.open("POST", "/add-chapterphilo-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -66,7 +67,7 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("chapter-philanthropies-table");
+    let currentTable = document.getElementById("chapter-philanthropies-table");                     // fix here 
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -77,19 +78,19 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    let ChapterPhiloIdCell = document.createElement("TD");
+    l//et ChapterPhiloIdCell = document.createElement("TD");
     let PhilanthropyRoleCell = document.createElement("TD");
     let EventIdCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
+    //ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
     PhilanthropyRoleCell.innerText = newRow.philanthropy_role;
     EventIdCell.innerText = newRow.event_id;
     ChapterIdCell.innerText = newRow.chapter_id;
 
     // Add the cells to the row 
-    row.appendChild(ChapterPhiloIdCell);
+    //row.appendChild(ChapterPhiloIdCell);
     row.appendChild(PhilanthropyRoleCell);
     row.appendChild(EventIdCell);
     row.appendChild(ChapterIdCell);
