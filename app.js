@@ -37,7 +37,7 @@ app.get('/', function(req, res)
     res.render('index');                                    // Note the call to render() and not send(). Using render() ensures the templating engine
 });                                                         // will process this file, before sending the finished HTML to the client.
 
-// Route to chapterphilo 
+// Route to chapterphilo ---------------------------------------------------------------------------------------------------
 app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
@@ -76,6 +76,16 @@ app.post('/add-chapterphilo-ajax', function(req, res){
         }
     })
 })
+
+// Route to chapters ---------------------------------------------------------------------------------------------------
+app.get('/chapters', function (req, res)              
+{
+    let query1 = "SELECT * FROM Chapters;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('chapters', { data: rows });         
+        })
+});
+
 
 /*
     LISTENER
