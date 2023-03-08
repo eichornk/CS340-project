@@ -52,30 +52,9 @@ app.post('/add-chapterphilo-ajax', function(req, res){
     let data = req.body;
     console.log(data);
 
-    // Capture NULL values - I think we can remove this section if they have to pick a value 
-    // let chapter_philanthropy_id = parseInt(data['input-chapter-philanthropy-id']);
-    // if (isNaN(chapter_philanthropy_id))                            // If philanthropyRole is nothing it will replace it with NULL. Not 100% sure if these are
-    // {                                                       // allowed to be NULL values so I will look into this later 
-        // chapter_philanthropy_id = 'NULL'                              
-    // }
-
-    let philanthropyRole = parseInt(data['input-philanthropy-role']);
-    if (isNaN(philanthropyRole))                            // If philanthropyRole is nothing it will replace it with NULL. Not 100% sure if these are
-    {                                                       // allowed to be NULL values so I will look into this later 
-        philanthropyRole = 'NULL'                              
-    }
-
-    let eventID = parseInt(data['input-event-id']);
-    if (isNaN(eventID))
-    {
-        eventID = 'NULL'
-    }
-
-    let chapterID = parseInt(data['input-chapter-id']);
-    if (isNaN(chapterID))
-    {
-        chapterID = 'NULL'
-    }
+    let philanthropyRole = data.philanthropy_role;
+    let eventID = parseInt(data.event_id);
+    let chapterID = parseInt(data.chapter_id);
 
     // Create the query and run it on the database
     query1 = `INSERT INTO Chapter_Philanthropies (philanthropy_role, event_id, chapter_id) VALUES ('${philanthropyRole}', ${eventID}, ${chapterID})`;
