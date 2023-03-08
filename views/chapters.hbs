@@ -1,0 +1,36 @@
+{{!-- Create a table --}}
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.chapter_id}}</td>
+            <td>{{this.chapter_name}}</td>
+            <td>{{this.nickname}}</td>
+            <td>{{this.colors}}</td>
+            <td>{{this.philanthropy}}</td>
+            <td>{{this.housed}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.council_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
