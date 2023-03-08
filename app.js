@@ -38,7 +38,7 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo 
-app.get('/chapterphilo', function (req, res)
+app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
     db.pool.query(query1, function (error, rows, fields) {
@@ -47,10 +47,18 @@ app.get('/chapterphilo', function (req, res)
 });
 
 app.post('/add-chapterphilo-ajax', function(req, res){
+
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
+    console.log(data);
 
     // Capture NULL values - I think we can remove this section if they have to pick a value 
+    // let chapter_philanthropy_id = parseInt(data['input-chapter-philanthropy-id']);
+    // if (isNaN(chapter_philanthropy_id))                            // If philanthropyRole is nothing it will replace it with NULL. Not 100% sure if these are
+    // {                                                       // allowed to be NULL values so I will look into this later 
+        // chapter_philanthropy_id = 'NULL'                              
+    // }
+
     let philanthropyRole = parseInt(data['input-philanthropy-role']);
     if (isNaN(philanthropyRole))                            // If philanthropyRole is nothing it will replace it with NULL. Not 100% sure if these are
     {                                                       // allowed to be NULL values so I will look into this later 
@@ -70,7 +78,7 @@ app.post('/add-chapterphilo-ajax', function(req, res){
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Chapter_Philanthropies (chapter_philanthropy_id, philanthropy_role, event_id, chapter_id) VALUES ('${chapter_philanthropy_id}', '${philanthropyRole}', ${eventID}, ${chapterID})`;
+    query1 = `INSERT INTO Chapter_Philanthropies (philanthropy_role, event_id, chapter_id) VALUES ('${philanthropyRole}', ${eventID}, ${chapterID})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
