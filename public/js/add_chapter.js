@@ -59,7 +59,7 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
             inputPhilanthropy.value = '';
             inputHoused.value = '';
             inputAddress.value = '';
-            inputChapterId.value = '';
+            inputCouncilId.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -94,7 +94,7 @@ addRowToTable = (data) => {
     let PhilanthropyCell = document.createElement("TD");
     let HousedCell = document.createElement("TD");
     let AddressCell = document.createElement("TD");
-    let ChapterIdCell = document.createElement("TD");
+    let CouncilIdCell = document.createElement("TD");
 
     // Fill the cells with correct data
     ChapterNameCell.innerText = newRow.chapter_name;
@@ -103,7 +103,7 @@ addRowToTable = (data) => {
     PhilanthropyCell.innerText = newRow.philanthropy;
     HousedCell.innerText = newRow.housed;
     AddressCell.innerText = newRow.address;
-    ChapterIdCell.innerText = newRow.chapter_id;
+    CouncilIdCell.innerText = newRow.council_id;
 
     // Add the cells to the row 
     row.appendChild(ChapterNameCell);
@@ -112,7 +112,7 @@ addRowToTable = (data) => {
     row.appendChild(PhilanthropyCell);
     row.appendChild(HousedCell);
     row.appendChild(AddressCell);
-    row.appendChild(ChapterIdCell);
+    row.appendChild(CouncilIdCell);
     
     // Add the row to the table
     currentTable.appendChild(row); 
