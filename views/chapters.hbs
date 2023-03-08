@@ -1,3 +1,5 @@
+<h1> Chapters </h1> 
+
 {{!-- Create a table --}}
 <table>
 
@@ -34,3 +36,37 @@
     </tbody>
 
 </table>
+
+<br>
+
+{{!-- Form to add a new chapter --}}
+<p>To add a new chapter, please enter their information below and click 'Submit'!</p>
+
+<form id="add-chapter-form-ajax">
+
+    <label for="input-chapter-name"> Chapter Name: </label>
+    <input type="text" name="input-chapter-name" id="input-chapter-name">
+
+    <label for="input-nickname"> Nickname: </label>
+    <input type="text" name="input-nickname" id="input-nickname">
+
+    <label for="input-colors"> Colors: </label>
+    <input type="text" name="input-colors" id="input-colors">
+
+    <label for="input-philanthropy"> Philanthropy: </label>
+    <input type="text" name="input-philanthropy" id="input-philanthropy">
+
+    <label for="input-housed"> Housed: </label>
+    <input type="number" name="input-housed" id="input-housed">
+
+    <label for="input-address"> Address: </label>
+    <input type="text" name="input-address" id="input-address">
+
+    <label for="input-chapter-id">Chapter ID: </label>
+    <input type="number" name="input-chapter-id" id="input-chapter-id">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_chapter.js"></script>
