@@ -80,7 +80,7 @@ app.post('/add-chapterphilo-ajax', function(req, res){
 app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
     let data = req.body;
     let ChapterPhilanthropyID = parseInt(data.id);
-    let deleteEvent= `DELETE FROM Events WHERE event_id = ?`;
+    let deleteEvent= `DELETE FROM Philanthropy_Events WHERE event_id = ?`;
     let deleteChapter= `DELETE FROM Chapters WHERE chapter_id = ?`;
     let deleteChapterPhilanthropies= `DELETE FROM Chapter_Philanthropies WHERE chapter_philanthropy_id = ?`;
   
@@ -162,11 +162,63 @@ app.get('/chapters', function (req, res)
 // Route to events ---------------------------------------------------------------------------------------------------
 app.get('/events', function (req, res)              
 {
-    let query1 = "SELECT * FROM Events;";
+    let query1 = "SELECT * FROM Philanthropy_Events;";
     db.pool.query(query1, function (error, rows, fields) {
         res.render('events', { data: rows });         
         })
 });
+app.post('/add-event-ajax', function(req, res){
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data);
+
+    let EventName = data.event_name;
+    let EventType = data.event_type;
+    let EventEntry = data.event_entry;
+    let EventStatus = data.event_status;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', ${EventType}, ${EventEntry}, ${EventStatus})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
+
+app.delete('/delete-event-ajax/', function(req,res,next){
+    let data = req.body;
+    let EventID = parseInt(data.id);
+    let deleteEvents= `DELETE FROM Philanthropy_Events WHERE event_id = ?`;
+  
+          // Run the 1st query
+          db.pool.query(deleteEvents, [EventID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+                }
+             })
+    });
 
 
 /*
