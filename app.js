@@ -77,12 +77,59 @@ app.post('/add-chapterphilo-ajax', function(req, res){
     })
 })
 
+app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
+    let data = req.body;
+    let ChapterPhilanthropyID = parseInt(data.id);
+    let deleteEvent= `DELETE FROM Events WHERE event_id = ?`;
+    let deleteChapter= `DELETE FROM Chapters WHERE chapter_id = ?`;
+    let deleteChapterPhilanthropies= `DELETE FROM Chapter_Philanthropies WHERE chapter_philanthropy_id = ?`;
+  
+          // Run the 1st query
+          db.pool.query(deleteEvent, [ChapterPhilanthropyID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteChapter, [ChapterPhilanthropyID], function(error, rows, fields) {
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } 
+                      else {
+                            db.pool.query(deleteChapterPhilanthropies, [ChapterPhilanthropyID], function(error, rows, fields) {
+                                if (error) {
+                                    console.log(error);
+                                    res.sendStatus(400);
+                             } else {
+                                res.sendStatus(204);
+                            }
+                        })
+                      }
+                  })
+              }
+  })});
+  
+
 // Route to chapters ---------------------------------------------------------------------------------------------------
 app.get('/chapters', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapters;";
     db.pool.query(query1, function (error, rows, fields) {
         res.render('chapters', { data: rows });         
+        })
+});
+// Route to events ---------------------------------------------------------------------------------------------------
+app.get('/events', function (req, res)              
+{
+    let query1 = "SELECT * FROM Events;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('events', { data: rows });         
         })
 });
 

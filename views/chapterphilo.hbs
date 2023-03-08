@@ -9,7 +9,7 @@ Citation for the following code:
 <p>If you see this text, the server is <strong>definitely</strong> working!</p>
 
 {{!-- Create a table --}}
-<table>
+<table id="chapter-philanthropies-table">>>
 
     {{!-- Header section --}}
     <thead>
@@ -22,6 +22,7 @@ Citation for the following code:
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
@@ -30,15 +31,15 @@ Citation for the following code:
 
         {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.chapter_philanthropy_id}}>
             <td>{{this.chapter_philanthropy_id}}</td>
             <td>{{this.philanthropy_role}}</td>
             <td>{{this.event_id}}</td>
             <td>{{this.chapter_id}}</td>
+             <td><button onclick="deleteChapterPhilanthropies({{this.chapter_philanthropy_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
-
 </table>
 
 {{!-- Form to add a record to the table using AJAX --}}
@@ -64,8 +65,7 @@ Citation for the following code:
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_chapterphilo.js"></script>
-
+<script src="./js/delete_chapterphilo.js"></script>
 
 {{!-- Not implemented yet --}}
-<script src="./js/delete_chapterphilo.js"></script>
 <script src="./js/update_chapterphilo.js"></script>

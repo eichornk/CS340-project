@@ -82,6 +82,7 @@ addRowToTable = (data) => {
     let PhilanthropyRoleCell = document.createElement("TD");
     let EventIdCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     //ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
@@ -89,11 +90,18 @@ addRowToTable = (data) => {
     EventIdCell.innerText = newRow.event_id;
     ChapterIdCell.innerText = newRow.chapter_id;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteChapterPhilanthropies(newRow.id);
+    };
+
     // Add the cells to the row 
     //row.appendChild(ChapterPhiloIdCell);
     row.appendChild(PhilanthropyRoleCell);
     row.appendChild(EventIdCell);
     row.appendChild(ChapterIdCell);
+    row.appendChild(deleteCell);
     
     // Add the row to the table
     currentTable.appendChild(row); 
