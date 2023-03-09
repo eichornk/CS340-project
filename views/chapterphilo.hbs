@@ -87,30 +87,6 @@ Citation for the following code:
 
 </form>
 
-
-!-- <h2>Updating A Chapter Philanthropy</h2>
-<p>To update a specific chapter's involvement select their chapter philanthropy id from the drop-down menu on the left and the chapter from the drop-down menu on the right</p>
-<form id="update-chapter-philanthropy-form-ajax">
-
-    <label for="input-chapter-philanthropy-id">Chapter Philanthropy ID: </label>
-    <select name="input-chapter-philanthropy-id" id="mySelect">
-        <option value="test">Select Chapter Philanthropy ID</option>
-        {{#each data}}
-        <option value="{{this.chapter_philanthropy_id}}">{{this.chapter_philanthropy_id}} </option>
-        {{/each}}
-    </select>
-
-    <label for="input-chapter-id">Chapter ID: </label>
-    <select name="input-chapter-id" id="input-chapter-id-update">
-        <option>Select Chapter</option>
-        {{#each chapters}}
-        <option value="{{this.chapter_id}}">{{this.chapter_id}} {{this.chapter_name}}</option>
-        {{/each}}
-    </select>
-    <input type="submit">
-
-</form> 
-
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_chapterphilo.js"></script>
 <script src="./js/delete_chapterphilo.js"></script>
