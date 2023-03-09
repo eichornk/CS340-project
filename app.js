@@ -306,6 +306,7 @@ app.get('/members', function (req, res)
         res.render('members', { data: rows });         
         })
 });
+
 app.post('/add-member-ajax', function(req, res){
 
     // Capture the incoming data and parse it back to a JS object
@@ -318,6 +319,7 @@ app.post('/add-member-ajax', function(req, res){
     let EmailAddress = data.email_address;
     let Major = data.major;
     let ChapterID = parseInt(data.chapter_id);
+    
     // Create the query and run it on the database
     query1 = `INSERT INTO Members (first_name, last_name, address, email_address, major, chapter_id ) VALUES ('${FirstName}', '${LastName}', '${Address}', '${EmailAddress}', '${Major}', ${ChapterID})`;
     db.pool.query(query1, function(error, rows, fields){

@@ -8,7 +8,6 @@ addMemberForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    //let inputChapterPhilanthropyId = document.getElementById("input-chapter-philanthropy-id");
     let inputFirstName = document.getElementById("input-first-name");
     let inputLastName = document.getElementById("input-last-name");
     let inputAddress = document.getElementById("input-address");
@@ -17,7 +16,6 @@ addMemberForm.addEventListener("submit", function (e) {
     let inputChapterId = document.getElementById("input-chapter-id");
 
     // Get the values from the form fields
-    //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
     let FirstNameValue = inputFirstName.value;
     let LastNameValue = inputLastName.value;
     let AddressValue = inputAddress.value;
@@ -105,6 +103,8 @@ addRowToTable = (data) => {
     row.appendChild(EmailAddressCell);
     row.appendChild(MajorCell);
     row.appendChild(ChapterIdCell);
+    
+    row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row); 
