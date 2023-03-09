@@ -348,6 +348,36 @@ app.get('/positions', function (req, res)
         })
 });
 
+app.post('/add-position-ajax', function(req, res){
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data);
+
+    let positionName = data.position_name;
+    let positionResponsibility = data.position_responsibility;
+    let memberID = parseInt(data.member_id);
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Positions (position_name, position_responsibility, member_id) VALUES ('${positionName}', '${positionResponsibility}', ${memberID})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
 
 
 /*
