@@ -339,6 +339,17 @@ app.post('/add-member-ajax', function(req, res){
     })
 })
 
+// Route to Positions -----------------------------------------------------------------------------------
+app.get('/positions', function (req, res)              
+{
+    let query1 = "SELECT * FROM Positions;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('positions', { data: rows });         
+        })
+});
+
+
+
 /*
     LISTENER
 */

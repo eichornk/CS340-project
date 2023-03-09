@@ -1,0 +1,65 @@
+<h1>GO GREEK</h1>
+<p>All things Fraternity and Sorority Life at Oregon State University!</p>
+<a href="/">Home</a> | <a href="/councils">Councils</a> |
+<a href="/chapters">Chapters</a> | <a href="/members">Members</a> |
+<a href="/positions">Positions</a> | <a href="/events">Philanthropy Events</a> |
+<a href="/chapterphilo">Chapter Philanthropies </a>
+
+<br>
+
+<h3> Positions </h3>
+
+{{!-- Create a table --}}
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.position_id}}</td>
+            <td>{{this.position_name}}</td>
+            <td>{{this.position_responsibility}}</td>
+            <td>{{this.member_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
+<br>
+
+{{!-- Form to add a new chapter --}}
+<p>To add a new chapter, please enter their information below and click 'Submit'!</p>
+
+<form id="add-position-form-ajax">
+
+    <label for="input-position-name"> Position Name: </label>
+    <input type="text" name="input-position-name" id="input-position-name">
+
+    <label for="input-position-responsibility"> Position Responsibility: </label>
+    <input type="text" name="input-position-responsibility" id="input-position-responsibility">
+
+    <label for="input-member-id"> Council ID: </label>
+    <input type="number" name="input-member-id" id="input-member-id">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_position.js"></script>
