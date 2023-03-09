@@ -102,7 +102,7 @@ addRowToTable = (data) => {
     row.appendChild(EventStatusCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute('data-value', newRow.id);
+    //row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row);

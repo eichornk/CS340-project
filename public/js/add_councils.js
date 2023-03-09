@@ -13,7 +13,7 @@ addCouncilForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputEventName = document.getElementById("input-council-name");
+    let inputCouncilName = document.getElementById("input-council-name");
 
     // Get the values from the form fields
     let CouncilNameValue = inputCouncilName.value;
@@ -72,7 +72,7 @@ addRowToTable = (data) => {
     // Add the cells to the row 
     row.appendChild(CouncilNameCell);
 
-    row.setAttribute('data-value', newRow.id);
+   // row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row);
