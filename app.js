@@ -215,7 +215,7 @@ app.post('/add-event-ajax', function(req, res){
     let EventStatus = data.event_status;
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', ${EventType}, ${EventEntry}, ${EventStatus})`;
+    query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', '${EventType}', ${EventEntry}, '${EventStatus}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
