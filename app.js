@@ -159,6 +159,42 @@ app.get('/chapters', function (req, res)
         res.render('chapters', { data: rows });         
         })
 });
+
+app.post('/add-chapter-ajax', function(req, res){
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data);
+
+    let chapterName = data.chapter_name;
+    let nickname = data.nickname;
+    let colors = data.colors;
+    let philanthropy = data.philanthropy;
+    let housed = data.housed;
+    let address = data.address;
+    let councilId = parseInt(data.council_id);
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Chapters (chapter_name, nickname, colors, philanthropy, housed, address, council_id) VALUES ('${chapterName}', '${nickname}', '${colors}', '${philanthropy}', ${housed}, '${address}', ${councilId})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
+
 // Route to events ---------------------------------------------------------------------------------------------------
 app.get('/events', function (req, res)              
 {
@@ -179,7 +215,7 @@ app.post('/add-event-ajax', function(req, res){
     let EventStatus = data.event_status;
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', ${EventType}, ${EventEntry}, ${EventStatus})`;
+    query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', '${EventType}', ${EventEntry}, '${EventStatus}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
