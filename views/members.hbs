@@ -10,7 +10,7 @@
 <h3> Members </h3>
 
 {{!-- Create a table --}}
-<table id="members-table">
+<table>
 
     {{!-- Header section --}}
     <thead>
@@ -29,9 +29,9 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
+        {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
         {{#each data}}
-        <tr data-value={{this.member_id}}>
+        <tr>
             <td>{{this.member_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
@@ -42,32 +42,36 @@
         </tr>
         {{/each}}
     </tbody>
+
 </table>
 
-<h3>Adding a New Member</h3>
+<br>
+
+{{!-- Form to add a new member --}}
 <p>To add a new member, please enter their information below and click 'Submit'!</p>
 
-<form id="add-member-form-ajax">
+<form id="add-member-ajax">
 
-    <label for="input-first-name">First Name: </label>
+    <label for="input-first-name"> First Name: </label>
     <input type="text" name="input-first-name" id="input-first-name">
 
-    <label for="input-last-name">Last Name: </label>
+    <label for="input-last-name"> Last Name: </label>
     <input type="text" name="input-last-name" id="input-last-name">
-    
-    <label for="input-address">Address: </label>
+
+    <label for="input-address"> Address: </label>
     <input type="text" name="input-address" id="input-address">
 
-    <label for="input-email-address">Email Address: </label>
+    <label for="input-email-address"> Email Address: </label>
     <input type="text" name="input-email-address" id="input-email-address">
 
-    <label for="input-major">Major: </label>
+    <label for="input-major"> Major: </label>
     <input type="text" name="input-major" id="input-major">
 
-    <label for="input-chapter_id">Chapter Id: </label> {{!This will later have to become a drop down to and show chapter names with Ids next to it}}
-    <input type="text" name="input-chapter_id" id="input-chapter_id">
+    <label for="input-chapter-id"> Chapter ID: </label>
+    <input type="number" name="input-chapter-id" id="input-chapter-id">
 
     <input type="submit">
 </form>
 
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_member.js"></script>

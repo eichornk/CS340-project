@@ -313,15 +313,15 @@ app.post('/add-member-ajax', function(req, res){
     let data = req.body;
     console.log(data);
 
-    let FirstName = data.first_name;
-    let LastName = data.last_name;
-    let Address = data.address;
-    let EmailAddress = data.email_address;
-    let Major = data.major;
-    let ChapterID = parseInt(data.chapter_id);
-    
+    let firstName = data.first_name;
+    let lastName = data.last_name;
+    let address = data.address;
+    let emailAddress = data.email_address;
+    let major = data.major;
+    let chapterID = parseInt(data.chapter_id);
+
     // Create the query and run it on the database
-    query1 = `INSERT INTO Members (first_name, last_name, address, email_address, major, chapter_id ) VALUES ('${FirstName}', '${LastName}', '${Address}', '${EmailAddress}', '${Major}', ${ChapterID})`;
+    query1 = `INSERT INTO Members (first_name, last_name, address, email_address, major, chapter_id) VALUES ('${firstName}', '${lastName}', '${address}', '${emailAddress}', '${major}', ${chapterID})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -340,6 +340,7 @@ app.post('/add-member-ajax', function(req, res){
         }
     })
 })
+
 
 // Route to Positions -----------------------------------------------------------------------------------
 app.get('/positions', function (req, res)              

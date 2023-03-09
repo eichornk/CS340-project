@@ -14,6 +14,7 @@ addMemberForm.addEventListener("submit", function (e) {
     let inputEmailAddress = document.getElementById("input-email-address");
     let inputMajor = document.getElementById("input-major");
     let inputChapterId = document.getElementById("input-chapter-id");
+    
 
     // Get the values from the form fields
     let FirstNameValue = inputFirstName.value;
@@ -22,6 +23,7 @@ addMemberForm.addEventListener("submit", function (e) {
     let EmailAddressValue = inputEmailAddress.value;
     let MajorValue = inputMajor.value;
     let ChapterIdValue = inputChapterId.value;
+    
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -30,7 +32,6 @@ addMemberForm.addEventListener("submit", function (e) {
         address: AddressValue,
         email_address: EmailAddressValue,
         major: MajorValue,
-        philanthropy: PhilanthropyValue,
         chapter_id: ChapterIdValue
     }
     
@@ -66,7 +67,7 @@ addMemberForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// Members
+// Chapter_Philanthropies
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -87,6 +88,7 @@ addRowToTable = (data) => {
     let EmailAddressCell = document.createElement("TD");
     let MajorCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
+    //let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     FirstNameCell.innerText = newRow.first_name;
@@ -96,16 +98,32 @@ addRowToTable = (data) => {
     MajorCell.innerText = newRow.major;
     ChapterIdCell.innerText = newRow.chapter_id;
 
+    // deleteCell = document.createElement("button");
+    // deleteCell.innerHTML = "Delete";
+    // deleteCell.onclick = function(){
+    //     deleteChapterPhilanthropies(newRow.id);
+    // };
+
     // Add the cells to the row 
+    //row.appendChild(ChapterPhiloIdCell);
     row.appendChild(FirstNameCell);
     row.appendChild(LastNameCell);
     row.appendChild(AddressCell);
     row.appendChild(EmailAddressCell);
     row.appendChild(MajorCell);
     row.appendChild(ChapterIdCell);
-    
+
+    //row.appendChild(deleteCell);
+
     row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
-    currentTable.appendChild(row); 
+    currentTable.appendChild(row);
+     // Find drop down menu, create a new option, fill data in the option (id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    // let selectMenu = document.getElementById("mySelect");
+    // let option = document.createElement("option");
+    // option.text = newRow.chapter_philanthropy_id;
+    // option.value = newRow.chapter_id;
+    // selectMenu.add(option); 
 }
