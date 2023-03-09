@@ -38,6 +38,13 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
+// app.get('/chapterphilo', function (req, res)              
+//  {
+//     let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_id, Chapters.chapter_id, FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON chapter_id = Chapters.chapter_id;";
+//     db.pool.query(query1, function (error, rows, fields) {
+//         res.render('chapterphilo', { data: rows });   
+//         })
+//  });
 app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
