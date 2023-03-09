@@ -175,7 +175,7 @@ app.post('/add-chapter-ajax', function(req, res){
     let councilId = parseInt(data.council_id);
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Chapters (chapter_name, nickname, colors, philanthropy, housed, address, council_id) VALUES (${chapterName}, ${nickname}, ${colors}, ${philanthropy}, ${housed}, ${address}, ${councilId})`;
+    query1 = `INSERT INTO Chapters (chapter_name, nickname, colors, philanthropy, housed, address, council_id) VALUES ('${chapterName}', '${nickname}', '${colors}', '${philanthropy}', ${housed}, '${address}', ${councilId})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error

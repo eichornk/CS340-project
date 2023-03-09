@@ -1,9 +1,9 @@
 
 // Get the objects we need to modify
-let addChapterPhilanthropyForm = document.getElementById('add-chapter-form-ajax');
+let addChapterForm = document.getElementById('add-chapter-form-ajax');
 
 // Modify the objects we need
-addChapterPhilanthropyForm.addEventListener("submit", function (e) {
+addChapterForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
@@ -16,7 +16,7 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     let inputPhilanthropy = document.getElementById("input-philanthropy");
     let inputHoused = document.getElementById("input-housed");
     let inputAddress = document.getElementById("input-address");
-    let inputChapterId = document.getElementById("input-chapter-id");
+    let inputCouncilId = document.getElementById("input-council-id");
 
     // Get the values from the form fields
     //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
@@ -26,7 +26,7 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     let PhilanthropyValue = inputPhilanthropy.value;
     let HousedValue = inputHoused.value;
     let AddressValue = inputAddress.value;
-    let CouncilIdValue = inputChapterId.value;
+    let CouncilIdValue = inputCouncilId.value;
 
     // Put our data we want to send in a javascript object
     let data = {
