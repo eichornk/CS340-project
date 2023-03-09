@@ -38,6 +38,13 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
+// app.get('/chapterphilo', function (req, res)              
+//  {
+//     let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_id, Chapters.chapter_id, FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON chapter_id = Chapters.chapter_id;";
+//     db.pool.query(query1, function (error, rows, fields) {
+//         res.render('chapterphilo', { data: rows });   
+//         })
+//  });
 app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
@@ -256,6 +263,81 @@ app.delete('/delete-event-ajax/', function(req,res,next){
              })
     });
 
+ // Route to councils ---------------------------------------------------------------------------------------------------
+app.get('/councils', function (req, res)              
+{
+    let query1 = "SELECT * FROM Councils;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('councils', { data: rows });         
+        })
+});
+app.post('/add-council-ajax', function(req, res){
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data);
+
+    let CouncilName = data.council_name;
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Councils (council_name) VALUES ('${CouncilName}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
+// Route to members ---------------------------------------------------------------------------------------------------
+app.get('/members', function (req, res)              
+{
+    let query1 = "SELECT * FROM Members;";
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('members', { data: rows });         
+        })
+});
+app.post('/add-member-ajax', function(req, res){
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data);
+
+    let FirstName = data.first_name;
+    let LastName = data.last_name;
+    let Address = data.address;
+    let EmailAddress = data.email_address;
+    let Major = data.major;
+    let ChapterID = parseInt(data.chapter_id);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Members (first_name, last_name, address, email_address, major, chapter_id ) VALUES ('${FirstName}', '${LastName}', '${Address}', '${EmailAddress}', '${Major}', ${ChapterID})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
 
 /*
     LISTENER
