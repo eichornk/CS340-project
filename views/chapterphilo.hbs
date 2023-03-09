@@ -80,7 +80,7 @@ Citation for the following code:
     <select name="input-chapter-id" id="input-chapter-id-update">
         <option>Select Chapter</option>
         {{#each chapters}}
-        <option value="{{this.chapter_id}}">{{this.chapter_id}} </option>
+        <option value="{{this.chapter_id}}">{{this.chapter_id}} {{this.chapter_name}} </option>
         {{/each}}
     </select>
     <input type="submit">
