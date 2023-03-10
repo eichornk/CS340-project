@@ -38,13 +38,44 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
-// app.get('/chapterphilo', function (req, res)              
-//  {
-//     let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_id, Chapters.chapter_id, FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON chapter_id = Chapters.chapter_id;";
-//     db.pool.query(query1, function (error, rows, fields) {
-//         res.render('chapterphilo', { data: rows });   
+//Attempt at Dropdown functionality for update operation with dropdown
+// app.get('/chaperphilo', function(req, res)
+// {
+//     let query1 = "SELECT * FROM Chapter_Philanthropies;";
+//     let query2 = "SELECT * FROM Chapters;";
+
+//     // Run the 1st query
+//     db.pool.query(query1, function(error, rows, fields){
+        
+//         // Save the chapter_philanthropies
+//         let chapter_philo = rows;
+        
+//         // Run the second query
+//         db.pool.query(query2, (error, rows, fields) => {
+            
+//             // Save the chapter
+//             let chapter = rows;
+
+//             // Construct an object for reference in the table
+//             // Array.map is awesome for doing something with each
+//             // element of an array.
+//             let chaptermap = {}
+//             chapters.map( chapter=> {
+//                 let id = parseInt(chapter.chapter_id, 10);
+
+//                 chaptermap[id] = chapter["name"];
+//             })
+
+//             // Overwrite the homeworld ID with the name of the planet in the people object
+//             chapter_philo = chapter_philo.map(chapter_philanthropy_id => {
+//                 return Object.assign(chapter_philanthropy_id, {homeworld: chaptersmap[chapter_philanthropy_id.chapter_id]})
+//             })
+
+//             // END OF NEW CODE
+//             return res.render('chapterphilo', {data: chapter_philo, chapters: chapter});
 //         })
-//  });
+//     })
+// });
 app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
@@ -299,6 +330,44 @@ app.post('/add-council-ajax', function(req, res){
     })
 })
 // Route to members ---------------------------------------------------------------------------------------------------
+//Attempt at Search Bar
+// app.get('/', function(req, res)
+// {
+//     // Declare Query 1
+//     let query1;
+
+//     // If there is no query string, we just perform a basic SELECT
+//     if (req.query.lname === undefined)
+//     {
+//         query1 = "SELECT * FROM Members;";
+//     }
+
+//     // If there is a query string, we assume this is a search, and return desired results
+//     else
+//     {
+//         query1 = `SELECT * FROM Members WHERE last_name LIKE "${req.query.lname}%"`
+//     }
+
+//     // Query 2 is the same in both cases
+//     let query2 = "SELECT * FROM Chapters;";
+
+//     // Run the 1st query
+//     db.pool.query(query1, function(error, rows, fields){
+        
+//         // Save the people
+//         let members = rows;
+        
+//         // Run the second query
+//         db.pool.query(query2, (error, rows, fields) => {
+            
+//             // Save the planets
+//             let chapters = rows;
+
+//             return res.render('index', {data: members, chapters: chapters});
+//         })
+//     })
+// });
+
 app.get('/members', function (req, res)              
 {
     let query1 = "SELECT * FROM Members;";

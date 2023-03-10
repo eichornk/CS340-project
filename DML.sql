@@ -29,15 +29,6 @@ FROM Members
 INNER JOIN Chapters ON chapter_id = Chapters.chapter_id
 WHERE first_name OR last_name LIKE :%searchbarnameInput;
 
-
---Query for updating member information
-SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS chapter_id 
-    FROM Members
-    WHERE member_id = :member_ID_selection_from_page;
-UPDATE Members 
-    SET first_name = :first_nameInput, last_name= :last_nameInput, address = :addressInput, email_address = :email_addressInput, major = :majorInput, chapter = :chapter_id_from_dropdown_Input
-    WHERE member_id= :member_ID_from_the_update_form;
-
 --Query for deleting member information
 DELETE FROM Members WHERE member_id = :member_ID_selection_from_page
 
@@ -52,14 +43,6 @@ SELECT position_id, position_name, position_responsibility, Members.first_name A
 FROM Positions
 INNER JOIN Members ON member_id = Members.member_id;
 
---Query for updating position information
-SELECT position_id, position_name, position_responsibility, Members.member_id
-    FROM Positions
-    WHERE position_id = :position_ID_selection_from_page;
-UPDATE Positions
-    SET position_name = :position_nameInput, position_responsibility= :position_responsibilityInput, member_id = :member_id_from_dropdown_Input
-    WHERE position_id= :position_ID_from_the_update_form;
-
 --Query for deleting position information
 DELETE FROM Positions WHERE position_id = :position_ID_selection_from_page
 
@@ -70,14 +53,6 @@ VALUES(:event_nameInput, :event_typeInput, :event_entryInput, event_statusInput)
 
 --Query for reading event information
 SELECT * FROM Philanthropy_Events;
-
---Query for updating philanthropy event information
-SELECT event_id, event_name, event_type, event_entry, event_status
-    FROM Philanthropy_Events
-    WHERE event_id = :event_ID_selection_from_page;
-UPDATE Philanthropy_Events
-    SET event_name = :event_nameInput, event_type= :event_typeInput, event_entry = :event_entryInput, event_status = :event_status_Input_from_dropdown
-    WHERE event_id= :event_ID_from_the_update_form;
 
 --Query for deleting philanthropy event
 DELETE FROM Philanthropy_Events WHERE event_id = :event_ID_selection_from_page
