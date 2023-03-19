@@ -39,6 +39,7 @@ app.get('/', function(req, res)
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
 //Attempt at Dropdown functionality for update operation with dropdown
+//THIS IS THE ATTEMPT TO TRY AND GET THE UPDATE FUNCTION TO WORK
 // app.get('/chaperphilo', function(req, res)
 // {
 //     let query1 = "SELECT * FROM Chapter_Philanthropies;";
@@ -68,7 +69,7 @@ app.get('/', function(req, res)
 
 //             // Overwrite the homeworld ID with the name of the planet in the people object
 //             chapter_philo = chapter_philo.map(chapter_philanthropy_id => {
-//                 return Object.assign(chapter_philanthropy_id, {homeworld: chaptersmap[chapter_philanthropy_id.chapter_id]})
+//                 return Object.assign(chapter_philanthropy_id, {chapter: chaptersmap[chapter_philanthropy_id.chapter_id]})
 //             })
 
 //             // END OF NEW CODE
@@ -76,6 +77,7 @@ app.get('/', function(req, res)
 //         })
 //     })
 // });
+//THIS READ FUNCTION WORKS
 app.get('/chapterphilo', function (req, res)              
 {
     let query1 = "SELECT * FROM Chapter_Philanthropies;";
