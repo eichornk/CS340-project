@@ -38,84 +38,62 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
-//Attempt at Dropdown functionality for update operation with dropdown
-//THIS IS THE ATTEMPT TO TRY AND GET THE UPDATE FUNCTION TO WORK
-// app.get('/chaperphilo', function(req, res)
-// {
-//     let query1 = "SELECT * FROM Chapter_Philanthropies;";
-//     let query2 = "SELECT * FROM Chapters;";
+//New Attempt at Intersection Table
+app.get('/chapterphilo', function(req, res){
+    let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_name as Event, Chapters.chapter_name as Chapter FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON Chapter_Philanthropies.chapter_id = Chapters.chapter_id;";
+    let query2 = "SELECT * FROM Philanthropy_Events;";
+    let query3 = "SELECT * FROM Chapters;";
 
-//     // Run the 1st query
-//     db.pool.query(query1, function(error, rows, fields){
-        
-//         // Save the chapter_philanthropies
-//         let chapter_philo = rows;
-        
-//         // Run the second query
-//         db.pool.query(query2, (error, rows, fields) => {
-            
-//             // Save the chapter
-//             let chapter = rows;
-
-//             // Construct an object for reference in the table
-//             // Array.map is awesome for doing something with each
-//             // element of an array.
-//             let chaptermap = {}
-//             chapters.map( chapter=> {
-//                 let id = parseInt(chapter.chapter_id, 10);
-
-//                 chaptermap[id] = chapter["name"];
-//             })
-
-//             // Overwrite the homeworld ID with the name of the planet in the people object
-//             chapter_philo = chapter_philo.map(chapter_philanthropy_id => {
-//                 return Object.assign(chapter_philanthropy_id, {chapter: chaptersmap[chapter_philanthropy_id.chapter_id]})
-//             })
-
-//             // END OF NEW CODE
-//             return res.render('chapterphilo', {data: chapter_philo, chapters: chapter});
-//         })
-//     })
-// });
-//THIS READ FUNCTION WORKS
-app.get('/chapterphilo', function (req, res)              
-{
-    let query1 = "SELECT * FROM Chapter_Philanthropies;";
-    db.pool.query(query1, function (error, rows, fields) {
-        res.render('chapterphilo', { data: rows });         // Here I changed 'Chapter_Philanthropy' to 'chapterphilo' and the routing process worked 
+    db.pool.query(query1, function(error, rows, fields){
+        //Save Chapter Philanthropies
+        let chapter_philanthropies = rows;
+        db.pool.query(query2, (error, rows, fields)=> {
+            //Save Events
+            let events = rows;
+            db.pool.query(query3, (error, rows, fields)=> {
+                //Save Chapters
+                let chapters = rows;
+                return res.render('chapterphilo', {data: chapter_philanthropies, events:events, chapters:chapters});
+            })
         })
+    })
 });
 
 app.post('/add-chapterphilo-ajax', function(req, res){
-
-    // Capture the incoming data and parse it back to a JS object
+// Capture the incoming data and parse it back to a JS object
     let data = req.body;
     console.log(data);
+    let event = parseInt(data.event_id);
+    if (isNaN(event)){
+        event = 'NULL'
+    };
 
-    let philanthropyRole = data.philanthropy_role;
-    let eventID = parseInt(data.event_id);
-    let chapterID = parseInt(data.chapter_id);
-
-    // Create the query and run it on the database
-    query1 = `INSERT INTO Chapter_Philanthropies (philanthropy_role, event_id, chapter_id) VALUES ('${philanthropyRole}', ${eventID}, ${chapterID})`;
-    db.pool.query(query1, function(error, rows, fields){
-
-        // Check to see if there was an error
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+    let chapter = parseInt(data.chapter_id);
+    if (isNaN(chapter)){
+        chapter = 'NULL'
+    };
+    add_query = `INSERT INTO Chapter_Philanthropies (philanthropy_role, event_id, chapter_id) VALUES ('${data.philanthropy_role}', '${data.event_id}', '${data.chapter_id}')`;
+    
+    db.pool.query(add_query, function(error, rows, fields){
+        if (error){
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
-        else
-        {
-            res.redirect('/');
+        else{
+            read_query =  "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_name as Event, Chapters.chapter_name as Chapter FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON Chapter_Philanthropies.chapter_id = Chapters.chapter_id;";
+            db.pool.query(read_query, function(error, rows, fields){
+                if (error){
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else{
+                    res.send(rows);
+                    //could be res.redirect(rows);
+                }
+            });
         }
-    })
-})
+    });  
+});
 
 app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
     let data = req.body;
@@ -155,42 +133,38 @@ app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
               }
   })});
 
-  app.put('/put-chapterphilo-ajax', function(req,res,next){
+app.put('/put-chapterphilo-ajax', function(req,res,next){
     let data = req.body;
-  
-    let chapter = parseInt(data.chapter_id);
-    let chapter_philanthropy = parseInt(data.chapter_philanthropy_id);
-  
-    let queryUpdateChapterPhilanthropy = `UPDATE Chapter_Philanthropies SET chapter_id = ? WHERE Chapter_Philanthropies.chapter_philanthropies_id = ?`;
-    let selectChapter = `SELECT * FROM Chapters WHERE chapter_id = ?`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateChapterPhilanthropy, [chapter, chapter_philanthropy], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectChapter, [chapter], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
-  
 
+    let Chapter_Philanthropy_Id = parseInt(data.chapter_philanthropy_id);
+    let Philanthropy_Role = data.philanthropy_role;
+    let Event_Id = parseInt(data.event_id);
+    let Chapter_Id = parseInt(data.chapter_id);
+
+    updateChapterPhilo = `UPDATE Chapter_Philanthropies SET philanthropy_role = '${Philanthropy_Role}', event_id = ${Event_Id}, chapter_id = ${Chapter_Id} WHERE chapter_philanthropy_id = ${Chapter_Philanthropy_Id}`;
+    db.pool.query(updateChapterPhilo, [Philanthropy_Role, Event_Id, Chapter_Id], function(error, rows, fields){
+        if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        }else{
+          // If there was no error, perform a SELECT * on Chapter_Philanthropies to refresh view
+          read_query = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_name as Event, Chapters.chapter_name as Chapter FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON Chapter_Philanthropies.chapter_id = Chapters.chapter_id;";
+          db.pool.query(read_query, function(error, rows, fields){
+              if (error) {
+                  console.log(error);
+                  res.sendStatus(400);
+              }
+              else{
+                  res.send(rows);
+              }
+          });
+
+      }
+    });
+});
+  
 // Route to chapters ---------------------------------------------------------------------------------------------------
 app.get('/chapters', function (req, res)              
 {

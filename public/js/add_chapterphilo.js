@@ -15,21 +15,20 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     //let inputChapterPhilanthropyId = document.getElementById("input-chapter-philanthropy-id");
     let inputPhilanthropyRole = document.getElementById("input-philanthropy-role");
-    let inputEventId = document.getElementById("input-event-id");
-    let inputChapterId = document.getElementById("input-chapter-id");
+    let inputEvent = document.getElementById("input-event-ajax"); //was input-event-id
+    let inputChapter = document.getElementById("input-chapter-ajax"); //was input-chapter-id
 
     // Get the values from the form fields
     //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
     let PhilanthropyRoleValue = inputPhilanthropyRole.value;
-    let EventIdValue = inputEventId.value;
-    let ChapterIdValue = inputChapterId.value;
+    let EventValue = inputEvent.value;
+    let ChapterValue = inputChapter.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        //chapter_philanthropy_id: ChapterPhilanthropyIdValue,
         philanthropy_role: PhilanthropyRoleValue,
-        event_id: EventIdValue,
-        chapter_id: ChapterIdValue
+        event_id: EventValue,
+        chapter_id: ChapterValue
     }
     
     // Setup our AJAX request
@@ -48,8 +47,8 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             //inputChapterPhilanthropyId.value = '';
             inputPhilanthropyRole.value = '';
-            inputEventId.value = '';
-            inputChapterId.value = '';
+            inputEvent.value = '';
+            inputChapter.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -78,17 +77,17 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    //let ChapterPhiloIdCell = document.createElement("TD");
+    let ChapterPhiloIdCell = document.createElement("TD");
     let PhilanthropyRoleCell = document.createElement("TD");
-    let EventIdCell = document.createElement("TD");
-    let ChapterIdCell = document.createElement("TD");
+    let EventCell = document.createElement("TD");
+    let ChapterCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    //ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
+    ChapterPhiloIdCell.innerText = newRow.chapter_philanthropy_id;
     PhilanthropyRoleCell.innerText = newRow.philanthropy_role;
-    EventIdCell.innerText = newRow.event_id;
-    ChapterIdCell.innerText = newRow.chapter_id;
+    EventCell.innerText = newRow.event; //was event_id
+    ChapterCell.innerText = newRow.chapter; //was chapter_id
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
@@ -97,21 +96,28 @@ addRowToTable = (data) => {
     };
 
     // Add the cells to the row 
-    //row.appendChild(ChapterPhiloIdCell);
+    row.appendChild(ChapterPhiloIdCell);
     row.appendChild(PhilanthropyRoleCell);
-    row.appendChild(EventIdCell);
-    row.appendChild(ChapterIdCell);
+    row.appendChild(EventCell);
+    row.appendChild(ChapterCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.chapter_philanthropies_id); //was just id
     
     // Add the row to the table
     currentTable.appendChild(row);
      // Find drop down menu, create a new option, fill data in the option (id),
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    //New Code
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
     option.text = newRow.chapter_philanthropy_id;
-    option.value = newRow.chapter_id;
     selectMenu.add(option); 
+
+    //Old Code
+    // let selectMenu = document.getElementById("mySelect");
+    // let option = document.createElement("option");
+    // option.text = newRow.chapter_philanthropy_id;
+    // option.value = newRow.chapter_id;
+    // selectMenu.add(option); 
 }

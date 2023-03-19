@@ -40,8 +40,8 @@ Citation for the following code:
         <tr data-value={{this.chapter_philanthropy_id}}>
             <td>{{this.chapter_philanthropy_id}}</td>
             <td>{{this.philanthropy_role}}</td>
-            <td>{{this.event_id}}</td>
-            <td>{{this.chapter_id}}</td>
+            <td>{{this.Event}}</td>
+            <td>{{this.Chapter}}</td>
              <td><button onclick="deleteChapterPhilanthropies('{{this.chapter_philanthropy_id}}')">Delete</button></td>
         </tr>
         {{/each}}
@@ -58,30 +58,61 @@ Citation for the following code:
     <label for="input-philanthropy-role">Philanthropy Role: </label>
     <input type="text" name="input-philanthropy-role" id="input-philanthropy-role">
 
-    <label for="input-event-id">Event ID: </label>
+    {{!-- <label for="input-event-id">Event ID: </label>
     <input type="number" name="input-event-id" id="input-event-id">
 
     <label for="input-chapter-id">Chapter ID: </label>
-    <input type="number" name="input-chapter-id" id="input-chapter-id">
+    <input type="number" name="input-chapter-id" id="input-chapter-id"> --}}
 
+    {{! Dropdown for Event Selection}}
+    <label for="input-Event">Philanthropy Event: </label>
+    <select name="input-Event" id="input-event-ajax">
+        <option value="">Select an Event</option>
+        {{#each events}}
+        <option value="{{this.event_id}}">{{this.event_name}}</option>
+        {{/each}}
+    </select>
+
+    {{! Dropdown for Chapter Selection}}
+
+    <label for="input-Chapter">Chapter: </label>
+    <select name="input-Chapter" id="input-chapter-ajax">
+        <option value="">Select a Chapter</option>
+        {{#each chapters}}
+        <option value="{{this.chapter_id}}">{{this.chapter_name}}</option>
+        {{/each}}
+    </select>
     <input type="submit">
 </form>
 
 <h3>Updating A Chapter Philanthropy</h3>
 <p>To update a specific chapter's involvement select their chapter philanthropy id from the drop-down menu on the left and the chapter from the drop-down menu on the right</p>
 <form id="update-chapter-philanthropy-form-ajax">
+
     <label for="input-chapter-philanthropy-id">Chapter Philanthropy ID: </label>
     <select name="input-chapter-philanthropy-id" id="mySelect">
-        <option value="test">Select Chapter Philanthropy ID</option>
+        <option value="">Select Chapter Philanthropy</option>
         {{#each data}}
         <option value="{{this.chapter_philanthropy_id}}">{{this.chapter_philanthropy_id}} </option>
         {{/each}}
     </select>
-    <label for="input-chapter-id">Chapter ID: </label>
+
+    <label for="update-philanthropy-role">Philanthropy Role: </label>
+    <input type="text" name="update-philanthropy-role" id="update-philanthropy-role">
+
+ <label for="input-event-id">Event: </label>
+    <select name="input-event-id" id="input-event-id-update">
+        <option>Select an Event</option>
+        {{#each events}}
+        <option value="{{this.event_id}}">{{this.event_name}} </option>
+        {{/each}}
+    </select>
+
+    <label for="input-chapter-id">Chapter: </label>
     <select name="input-chapter-id" id="input-chapter-id-update">
-        <option>Select Chapter</option>
+        <option>Select a Chapter</option>
         {{#each chapters}}
-        <option value="{{this.chapter_id}}">{{this.chapter_id}} {{this.chapter_name}} </option>
+        <option value="{{this.chapter_id}}">{{this.chapter_name}} </option>
         {{/each}}
     </select>
     <input type="submit">

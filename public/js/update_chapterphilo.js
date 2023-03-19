@@ -9,16 +9,20 @@ updateChapterPhilanthropyForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputChapterPhilanthropyId = document.getElementById("mySelect");
+    let inputPhilanthropyRole = document.getElementById("update-philanthropy-role");
+    let inputEventId = document.getElementById("input-event-id-update");
     let inputChapterId = document.getElementById("input-chapter-id-update");
 
     // Get the values from the form fields
     let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
+    let PhilanthropyRoleValue = inputPhilanthropyRole.value;
+    let EventIdValue = inputEventId.value;
     let ChapterIdValue = inputChapterId.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(ChapterIdValue)) 
+    if (isNaN(ChapterPhilanthropyIdValue)) 
     {
         return;
     }
@@ -27,7 +31,9 @@ updateChapterPhilanthropyForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         chapter_philanthropy_id: ChapterPhilanthropyIdValue,
-        chapter_id: ChapterIdValue,
+        philanthropy_role: PhilanthropyRoleValue,
+        event_id: EventIdValue,
+        chapter_id: ChapterIdValue
     }
     
     // Setup our AJAX request
@@ -68,10 +74,14 @@ function updateRow(data, ChapterPhilanthropyID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of chapter value
-            let td = updateRowIndex.getElementsByTagName("td")[3];
+            let role = updateRowIndex.getElementsByTagName("td")[2];
+            let eventID = updateRowIndex.getElementsByTagName("td")[3];
+            let chapterID = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign chapter to id we assigned it to
-            td.innerHTML = parsedData[0].name; 
+            role.innerHTML = parsedData[0].philanthropy_role; 
+            eventID.innerHTML = parsedData[0].event_id;
+            chapterID.innerHTML = parsedData[0].chapter_id;
        }
     }
 }
