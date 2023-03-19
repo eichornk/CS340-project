@@ -332,44 +332,6 @@ app.post('/add-council-ajax', function(req, res){
     })
 })
 // Route to members ---------------------------------------------------------------------------------------------------
-//Attempt at Search Bar
-// app.get('/', function(req, res)
-// {
-//     // Declare Query 1
-//     let query1;
-
-//     // If there is no query string, we just perform a basic SELECT
-//     if (req.query.lname === undefined)
-//     {
-//         query1 = "SELECT * FROM Members;";
-//     }
-
-//     // If there is a query string, we assume this is a search, and return desired results
-//     else
-//     {
-//         query1 = `SELECT * FROM Members WHERE last_name LIKE "${req.query.lname}%"`
-//     }
-
-//     // Query 2 is the same in both cases
-//     let query2 = "SELECT * FROM Chapters;";
-
-//     // Run the 1st query
-//     db.pool.query(query1, function(error, rows, fields){
-        
-//         // Save the people
-//         let members = rows;
-        
-//         // Run the second query
-//         db.pool.query(query2, (error, rows, fields) => {
-            
-//             // Save the planets
-//             let chapters = rows;
-
-//             return res.render('index', {data: members, chapters: chapters});
-//         })
-//     })
-// });
-
 app.get('/members', function (req, res)              
 {
     let query1 = "SELECT * FROM Members;";
