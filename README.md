@@ -9,30 +9,35 @@ For this database, the nodejs starter app that was provided by our Professors wa
 
 The handlebars files located in the folder views were adapted from various steps of the starter app, specifically steps 3 through 8 to display the database properly and implement add, delete, and update operations.
 
-Citation for the code in the folder called views:
-Date: 3/20/2023
-Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) more specifically steps 3 and 5-8 that implement the design of the website.
-The code was adapted to feature the same attribute names and entities as well as implementing dropdown menus. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-Source for Dropdown Displays Menus: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box 
+<ul>
+<li>Citation for the code in the folder called views:</li>
+<li>Date: 3/20/2023</li>
+<li>Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) more specifically steps 3 and 5-8 that implement the design of the website. </li>
+<li>The code was adapted to feature the same attribute names and entities as well as implementing dropdown menus.</li>
+<li>Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app </li>
+<li>Source for Dropdown Displays Menus: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box </li>
+</ul>
 
 The javascript files located in the public folder under js is used in adding, deleting, and updating database tables were adapted from the steps 5 through 8 of the nodejs starter app to make sure these operations were functional. 
 
-Citation for the code in the folder called public/js:
-Date: 3/20/2023
-Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) more specifically steps 5-8 that implement add, update, and delete functions to the website.
-The code was adapted to feature the same attribute names and entities. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-Source for Add Functions: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
-Source for Update Functions:https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data 
-Source for Delete Functions: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+<ul>
+<li>Citation for the code in the folder called public/js:</li>
+<li>Date: 3/20/2023</li>
+<li>Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) more specifically steps 5-8 that implement add, update, and delete functions to the website.</li>
+<li>The code was adapted to feature the same attribute names and entities.</li>
+<li>Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app</li>
+<li>Source for Add Functions: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data </li>
+<li>Source for Update Functions:https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data </li>
+<li>Source for Delete Functions: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data </li>
+</ul>
 
 The app.js file was set up from beginning stages of the nodejs starter app in steps 1 and 2 and then were evolved to implement the add, update, read, and delete functions as well as to match the DML file that offers queries on how to access data from the database. 
-
-Citation for the app.js file:
-Date: 3/20/2023
-Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app).
-The code was adapted to implement queries from the DML file and the tables of the database as far as attribute and entity names. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+<ul>
+<li>Citation for the app.js file:</li>
+<li>Date: 3/20/2023 </li>
+<li>Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app). </li>
+<li>The code was adapted to implement queries from the DML file and the tables of the database as far as attribute and entity names. </li>
+<li> Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app </li>
+</ul>
 
 
