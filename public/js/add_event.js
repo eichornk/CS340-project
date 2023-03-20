@@ -1,7 +1,8 @@
 // Citation for the following code:
-// Date: 3/2/2023
-// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 5 on adding new data.
+// The code was adapted to match the attributes of the events table in order to add new records to the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Get the objects we need to modify
 let addEventForm = document.getElementById('add-event-form-ajax');
@@ -62,7 +63,7 @@ addEventForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// Chapter_Philanthropies
+// Philanthropy_Events
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -75,7 +76,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 5 cells
     let row = document.createElement("TR");
     let EventNameCell = document.createElement("TD");
     let EventTypeCell = document.createElement("TD");
@@ -101,8 +102,6 @@ addRowToTable = (data) => {
     row.appendChild(EventEntryCell);
     row.appendChild(EventStatusCell);
     row.appendChild(deleteCell);
-
-    //row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row);

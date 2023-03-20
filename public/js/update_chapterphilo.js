@@ -1,3 +1,9 @@
+// Citation for the following code:
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 8 on updating data.
+// The code was adapted to match the attributes of the chapter philanthropies table in order to update records in the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updateChapterPhilanthropyForm = document.getElementById('update-chapter-philanthropy-form-ajax');
 
@@ -18,15 +24,11 @@ updateChapterPhilanthropyForm.addEventListener("submit", function (e) {
     let PhilanthropyRoleValue = inputPhilanthropyRole.value;
     let EventIdValue = inputEventId.value;
     let ChapterIdValue = inputChapterId.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
 
     if (isNaN(ChapterPhilanthropyIdValue)) 
     {
         return;
     }
-
 
     // Put our data we want to send in a javascript object
     let data = {

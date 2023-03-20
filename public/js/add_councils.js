@@ -1,7 +1,8 @@
 // Citation for the following code:
-// Date: 3/2/2023
-// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 5 on adding new data.
+// The code was adapted to match the attributes of the councils table in order to add new records to the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Get the objects we need to modify
 let addCouncilForm = document.getElementById('add-council-form-ajax');
@@ -62,7 +63,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 2 cells
     let row = document.createElement("TR");
     let CouncilNameCell = document.createElement("TD");
 

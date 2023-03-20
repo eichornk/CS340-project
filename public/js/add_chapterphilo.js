@@ -1,7 +1,8 @@
 // Citation for the following code:
-// Date: 3/2/2023
-// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 5 on adding new data.
+// The code was adapted to match the attributes of the chapter philanthropies table in order to add new records to the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Get the objects we need to modify
 let addChapterPhilanthropyForm = document.getElementById('add-chapter-philanthropy-form-ajax');
@@ -13,13 +14,11 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    //let inputChapterPhilanthropyId = document.getElementById("input-chapter-philanthropy-id");
     let inputPhilanthropyRole = document.getElementById("input-philanthropy-role");
     let inputEvent = document.getElementById("input-event-ajax"); //was input-event-id
     let inputChapter = document.getElementById("input-chapter-ajax"); //was input-chapter-id
 
     // Get the values from the form fields
-    //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
     let PhilanthropyRoleValue = inputPhilanthropyRole.value;
     let EventValue = inputEvent.value;
     let ChapterValue = inputChapter.value;
@@ -33,7 +32,6 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", "/add-chapter-philanthropy-ajax", true);
     xhttp.open("POST", "/add-chapterphilo-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -45,7 +43,6 @@ addChapterPhilanthropyForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            //inputChapterPhilanthropyId.value = '';
             inputPhilanthropyRole.value = '';
             inputEvent.value = '';
             inputChapter.value = '';
@@ -75,7 +72,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 5 cells
     let row = document.createElement("TR");
     let ChapterPhiloIdCell = document.createElement("TD");
     let PhilanthropyRoleCell = document.createElement("TD");
@@ -108,16 +105,8 @@ addRowToTable = (data) => {
     currentTable.appendChild(row);
      // Find drop down menu, create a new option, fill data in the option (id),
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-    //New Code
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
     option.text = newRow.chapter_philanthropy_id;
     selectMenu.add(option); 
-
-    //Old Code
-    // let selectMenu = document.getElementById("mySelect");
-    // let option = document.createElement("option");
-    // option.text = newRow.chapter_philanthropy_id;
-    // option.value = newRow.chapter_id;
-    // selectMenu.add(option); 
 }

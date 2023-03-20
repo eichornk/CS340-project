@@ -1,3 +1,11 @@
+{{!--
+Citation for the following code:
+Date: 3/2/2023
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app), specifically steps 5 and 6.
+The code was adapted to implement handlebars for the members page and more specifically the add function.
+It was adapted to match the entities and attributes of the table along with implementing dropdpown menus for functionality.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
 <ul>    
     <li><a href="/">Home</a></li>
     <li><a href="/councils">Councils</a></li>
@@ -30,7 +38,7 @@
         {{!-- Body section --}}
 
         <tbody>
-            {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
+            {{!-- For each row, print the member id, first name, last name, address, email address, major and chapter in order --}}
             {{#each data}}
             <tr>
                 <td>{{this.member_id}}</td>

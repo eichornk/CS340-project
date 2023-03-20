@@ -1,3 +1,9 @@
+// Citation for the following code:
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 7 on deleting new data.
+// The code was adapted to match the attributes of the events table in order to delete records from the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data 
+
 function deleteEvents(EventID) {
  // Put our data we want to send in a javascript object
  let data = {
