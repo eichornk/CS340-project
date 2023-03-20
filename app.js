@@ -46,6 +46,7 @@ app.get('/chapterphilo', function(req, res){
     db.pool.query(query1, function(error, rows, fields){
         //Save Chapter Philanthropies
         let chapter_philanthropies = rows;
+        console.log(rows)
         db.pool.query(query2, (error, rows, fields)=> {
             //Save Events
             let events = rows;
@@ -221,6 +222,7 @@ app.get('/events', function (req, res)
         res.render('events', { data: rows });         
         })
 });
+
 app.post('/add-event-ajax', function(req, res){
 
     // Capture the incoming data and parse it back to a JS object
@@ -311,7 +313,7 @@ app.post('/add-council-ajax', function(req, res){
 })
 // Route to members ---------------------------------------------------------------------------------------------------
 app.get('/members', function (req, res){ 
-    let query1 = "SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS Chapter_Affiliation FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
+    let query1 = "SELECT member_id, first_name, last_name, Members.address, email_address, major, Chapters.chapter_name AS Chapter_Affiliation FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
     let query2 = "SELECT * FROM Chapters;";
     db.pool.query(query1, function (error, rows, fields) {
         let member = rows;
