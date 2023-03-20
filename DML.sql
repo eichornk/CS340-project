@@ -28,9 +28,6 @@ SELECT member_id, first_name, last_name, address, email_address, major, Chapters
 FROM Members
 INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;
 
---Query for deleting member information
-DELETE FROM Members WHERE member_id = :member_ID_selection_from_page
-
 --------Positions--------
 --Query for adding a position
 SELECT member_id, first_name, last_name FROM Members
@@ -41,9 +38,6 @@ VALUES(:position_nameInput, :position_responsibilityInput, :member_id_from_dropd
 SELECT position_id, position_name, position_responsibility, Members.first_name AND Members.last_name AS member_id 
 FROM Positions
 INNER JOIN Members ON Positions.member_id = Members.member_id;
-
---Query for deleting position information
-DELETE FROM Positions WHERE position_id = :position_ID_selection_from_page
 
 --------Philanthropy_Events-------- 
 --Query for adding a philanthropy event
