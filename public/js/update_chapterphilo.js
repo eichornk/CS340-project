@@ -53,13 +53,9 @@ updateChapterPhilanthropyForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
-
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-
 })
-
-
 function updateRow(data, ChapterPhilanthropyID){
     let parsedData = JSON.parse(data);
     
@@ -72,8 +68,6 @@ function updateRow(data, ChapterPhilanthropyID){
 
             // Get the location of the row where we found the matching chapter philanthropy ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-            // Get td of chapter value
             let role = updateRowIndex.getElementsByTagName("td")[2];
             let eventID = updateRowIndex.getElementsByTagName("td")[3];
             let chapterID = updateRowIndex.getElementsByTagName("td")[4];

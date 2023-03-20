@@ -13,7 +13,7 @@ addMemberForm.addEventListener("submit", function (e) {
     let inputAddress = document.getElementById("input-address");
     let inputEmailAddress = document.getElementById("input-email-address");
     let inputMajor = document.getElementById("input-major");
-    let inputChapterId = document.getElementById("input-chapter-id");
+    let inputChapterId = document.getElementById("input-chapter-ajax");
     
 
     // Get the values from the form fields

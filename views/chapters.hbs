@@ -39,7 +39,7 @@
             <td>{{this.philanthropy}}</td>
             <td>{{this.housed}}</td>
             <td>{{this.address}}</td>
-            <td>{{this.council_id}}</td>
+            <td>{{this.Council}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -66,14 +66,18 @@
     <label for="input-philanthropy"> Philanthropy: </label>
     <input type="text" name="input-philanthropy" id="input-philanthropy">
 
-    <label for="input-housed"> Housed: </label>
+    <label for="input-housed"> Housed (1-Yes, 0-No): </label>
     <input type="number" name="input-housed" id="input-housed">
 
     <label for="input-address"> Address: </label>
     <input type="text" name="input-address" id="input-address">
 
-    <label for="input-council-id"> Council ID: </label>
-    <input type="number" name="input-council-id" id="input-council-id">
+    <select name="input-council-id" id="input-council-ajax">
+        <option value=""> Select A Council</option>
+        {{#each council}}
+        <option value="{{this.council_id}}">{{this.council_name}}</option>
+        {{/each}}
+    </select>
 
     <input type="submit">
 </form>

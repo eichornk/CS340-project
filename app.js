@@ -38,7 +38,6 @@ app.get('/', function(req, res)
 });                                                         // will process this file, before sending the finished HTML to the client.
 
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
-//New Attempt at Intersection Table
 app.get('/chapterphilo', function(req, res){
     let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_name as Event, Chapters.chapter_name as Chapter FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON Chapter_Philanthropies.chapter_id = Chapters.chapter_id;";
     let query2 = "SELECT * FROM Philanthropy_Events;";
@@ -159,19 +158,24 @@ app.put('/put-chapterphilo-ajax', function(req,res,next){
               else{
                   res.send(rows);
               }
-          });
+          })
 
       }
-    });
+    })
 });
   
 // Route to chapters ---------------------------------------------------------------------------------------------------
 app.get('/chapters', function (req, res)              
 {
-    let query1 = "SELECT * FROM Chapters;";
+    let query1 = "SELECT chapter_id, chapter_name, nickname, colors, philanthropy, housed, address, Councils.council_name AS Council FROM Chapters INNER JOIN Councils ON Chapters.council_id = Councils.council_id;";
+    let query2 = "SELECT * FROM Councils;";
     db.pool.query(query1, function (error, rows, fields) {
-        res.render('chapters', { data: rows });         
-        })
+        let chapter = rows;
+        db.pool.query(query2, (error, rows, fields)=> {
+            let council = rows;
+            return res.render('chapters', {data: chapter, council:council});
+        })       
+     })
 });
 
 app.post('/add-chapter-ajax', function(req, res){
@@ -207,7 +211,7 @@ app.post('/add-chapter-ajax', function(req, res){
             res.redirect('/');
         }
     })
-})
+});
 
 // Route to events ---------------------------------------------------------------------------------------------------
 app.get('/events', function (req, res)              
@@ -306,12 +310,16 @@ app.post('/add-council-ajax', function(req, res){
     })
 })
 // Route to members ---------------------------------------------------------------------------------------------------
-app.get('/members', function (req, res)              
-{
-    let query1 = "SELECT * FROM Members;";
+app.get('/members', function (req, res){ 
+    let query1 = "SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS Chapter FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
+    let query2 = "SELECT * FROM Chapters;";
     db.pool.query(query1, function (error, rows, fields) {
-        res.render('members', { data: rows });         
-        })
+        let member = rows;
+        db.pool.query(query2, (error, rows, fields)=> {
+            let chapter = rows;
+            return res.render('members', {data: member, chapter:chapter});
+        })      
+     })
 });
 
 app.post('/add-member-ajax', function(req, res){

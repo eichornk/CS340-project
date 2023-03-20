@@ -16,7 +16,7 @@ addChapterForm.addEventListener("submit", function (e) {
     let inputPhilanthropy = document.getElementById("input-philanthropy");
     let inputHoused = document.getElementById("input-housed");
     let inputAddress = document.getElementById("input-address");
-    let inputCouncilId = document.getElementById("input-council-id");
+    let inputCouncilId = document.getElementById("input-council-ajax");
 
     // Get the values from the form fields
     //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;

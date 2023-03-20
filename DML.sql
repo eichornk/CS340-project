@@ -15,7 +15,7 @@ VALUES (:chapter_nameInput, :nicknameInput, ;colorsInput, :philanthropyInput, :h
 --Query for reading chapter information
 SELECT chapter_id, chapter_name, nickname, colors, philanthropy, housed, address, Councils.council_name AS council_id
 FROM Chapters
-INNER JOIN Councils ON council_id = Councils.council_id;
+INNER JOIN Councils ON Chapters.council_id = Councils.council_id;
 
 --------Members--------
 --Query for adding a memeber
@@ -26,8 +26,7 @@ VALUES(:first_nameInput, :last_nameInput, :addressInput, :email_addressInput, :m
 --Query for reading member information in dynamic search bar
 SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS chapter_id 
 FROM Members
-INNER JOIN Chapters ON chapter_id = Chapters.chapter_id
-WHERE first_name OR last_name LIKE :%searchbarnameInput;
+INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;
 
 --Query for deleting member information
 DELETE FROM Members WHERE member_id = :member_ID_selection_from_page
@@ -41,7 +40,7 @@ VALUES(:position_nameInput, :position_responsibilityInput, :member_id_from_dropd
 --Query for reading postion information
 SELECT position_id, position_name, position_responsibility, Members.first_name AND Members.last_name AS member_id 
 FROM Positions
-INNER JOIN Members ON member_id = Members.member_id;
+INNER JOIN Members ON Positions.member_id = Members.member_id;
 
 --Query for deleting position information
 DELETE FROM Positions WHERE position_id = :position_ID_selection_from_page
@@ -68,7 +67,7 @@ VALUES(:philanthropy_roleInput, :chapter_id_from_dropdown_Input, :event_id_from_
 SELECT chapter_philanthropy_id, philanthropy_role, Chapter.chapter_name AS chapter_id, Philanthropy_Events.event_name AS event_id 
 FROM Chapter_Philanthropies
 INNER JOIN Chapters ON chapter_id = Chapters.chapter_id
-INNER JOIN Philanthropy_Events ON event_id = Philanthropy_Events.event_id;
+INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id;
 
 --Query for updating chapter philanthropy paticipation
 SELECT chapter_philanthropy_id, philanthropy_role, Chapter.chapter_name AS council_id, Philanthropy_Events.event_name AS event_id

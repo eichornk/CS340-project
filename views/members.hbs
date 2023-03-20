@@ -37,7 +37,7 @@
             <td>{{this.address}}</td>
             <td>{{this.email_address}}</td>
             <td>{{this.major}}</td>
-            <td>{{this.chapter_id}}</td>
+            <td>{{this.Chapter}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -67,9 +67,13 @@
     <label for="input-major"> Major: </label>
     <input type="text" name="input-major" id="input-major">
 
-    <label for="input-chapter-id"> Chapter ID: </label>
-    <input type="number" name="input-chapter-id" id="input-chapter-id">
-
+     <select name="input-chapter-id" id="input-chapter-ajax">
+        <option value=""> Select A Chapter</option>
+        {{#each chapter}}
+        <option value="{{this.chapter_id}}">{{this.chapter_name}}</option>
+        {{/each}}
+    </select>
+    
     <input type="submit">
 </form>
 
