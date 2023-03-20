@@ -1,51 +1,60 @@
-<h1>GO GREEK</h1>
-<p>All things Fraternity and Sorority Life at Oregon State University!</p>
-<a href="/">Home</a> | <a href="/councils">Councils</a> |
-<a href="/chapters">Chapters</a> | <a href="/members">Members</a> |
-<a href="/positions">Positions</a> | <a href="/events">Philanthropy Events</a> |
-<a href="/chapterphilo">Chapter Philanthropies </a>
+<ul>    
+    <li><a href="/">Home</a></li>
+    <li><a href="/councils">Councils</a></li>
+    <li><a href="/chapters">Chapters</a></li>
+    <li><a href="/members">Members</a></li>
+    <li><a href="/positions">Positions</a></li>
+    <li><a href="/events">Philanthropy Events</a></li>
+    <li><a href="/chapterphilo">Chapter Philanthropies</a></li>
+</ul>
 
-<br>
+<div class="margins">
 
-<h2> Councils </h2>
+    <h2> Councils </h2>
 
-{{!-- Create a table --}}
-<table id="councils-table">
+    {{!-- Create a table --}}
+    <table class="council_table">
 
-    {{!-- Header section --}}
-    <thead>
+        {{!-- Header section --}}
+        <thead>
 
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
+            {{#each data}}
+            <tr data-value={{this.council_id}}>
+                <td>{{this.council_id}}</td>
+                <td>{{this.council_name}}</td>
+            </tr>
             {{/each}}
-        </tr>
-    </thead>
+        </tbody>
+    </table>
 
-    {{!-- Body section --}}
-    <tbody>
+    <div class="form_margins">
 
-        {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
-        {{#each data}}
-        <tr data-value={{this.council_id}}>
-            <td>{{this.council_id}}</td>
-            <td>{{this.council_name}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<h3>Adding a New Council</h3>
-<p>To add a new council, please enter their information below and click 'Submit'!</p>
+        <h3>Adding a New Council</h3>
+        <p>To add a new council, please enter their information below and click 'Submit'!</p>
 
-<form id="add-council-form-ajax">
+        <form id="add-council-form-ajax">
 
-    <label for="input-council-name">Council Name: </label>
-    <input type="text" name="input-council-name" id="input-council-name">
+            <label for="input-council-name">Council Name: </label>
+            <input type="text" name="input-council-name" id="input-council-name">
 
-    <input type="submit">
-</form>
+            <input class="orange_button" type="submit">
+        </form>
+    </div>
+</div>
+
 <script src="./js/add_councils.js"></script>

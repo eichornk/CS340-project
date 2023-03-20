@@ -1,81 +1,84 @@
-<h1>GO GREEK</h1>
-<p>All things Fraternity and Sorority Life at Oregon State University!</p>
-<a href="/">Home</a> | <a href="/councils">Councils</a> |
-<a href="/chapters">Chapters</a> | <a href="/members">Members</a> |
-<a href="/positions">Positions</a> | <a href="/events">Philanthropy Events</a> |
-<a href="/chapterphilo">Chapter Philanthropies </a>
+<ul>    
+    <li><a href="/">Home</a></li>
+    <li><a href="/councils">Councils</a></li>
+    <li><a href="/chapters">Chapters</a></li>
+    <li><a href="/members">Members</a></li>
+    <li><a href="/positions">Positions</a></li>
+    <li><a href="/events">Philanthropy Events</a></li>
+    <li><a href="/chapterphilo">Chapter Philanthropies</a></li>
+</ul>
 
-<br>
+<div class="margins"> 
+    <h2> Members </h2>
 
-<h2> Members </h2>
+    {{!-- Create a table --}}
+    <table>
 
-{{!-- Create a table --}}
-<table>
+        {{!-- Header section --}}
+        <thead>
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
 
-    {{!-- Header section --}}
-    <thead>
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+        {{!-- Body section --}}
+
+        <tbody>
+            {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
+            {{#each data}}
+            <tr>
+                <td>{{this.member_id}}</td>
+                <td>{{this.first_name}}</td>
+                <td>{{this.last_name}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.email_address}}</td>
+                <td>{{this.major}}</td>
+                <td>{{this.chapter_id}}</td>
+            </tr>
             {{/each}}
-        </tr>
-    </thead>
+        </tbody>
+    </table>
 
-    {{!-- Body section --}}
-    <tbody>
+    <div class="form_margins">
 
-        {{!-- For each row, print the chapter id, chapter name, nickname, colors, philanthropy, housed, address, council_id in order --}}
-        {{#each data}}
-        <tr>
-            <td>{{this.member_id}}</td>
-            <td>{{this.first_name}}</td>
-            <td>{{this.last_name}}</td>
-            <td>{{this.address}}</td>
-            <td>{{this.email_address}}</td>
-            <td>{{this.major}}</td>
-            <td>{{this.Chapter_Affiliation}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
+        {{!-- Form to add a new member --}}
+        <h3> Adding New Member </h3>
+        <p>To add a new member, please enter their information below and click 'Submit'!</p>
 
-</table>
+        <form id="add-member-form-ajax">
 
-<br>
+            <label for="input-first-name"> First Name: </label>
+            <input type="text" name="input-first-name" id="input-first-name">
 
-{{!-- Form to add a new member --}}
-<h3> Adding New Member </h3>
-<p>To add a new member, please enter their information below and click 'Submit'!</p>
+            <label for="input-last-name"> Last Name: </label>
+            <input type="text" name="input-last-name" id="input-last-name">
 
-<form id="add-member-form-ajax">
+            <label for="input-address"> Address: </label>
+            <input type="text" name="input-address" id="input-address">
 
-    <label for="input-first-name"> First Name: </label>
-    <input type="text" name="input-first-name" id="input-first-name">
+            <label for="input-email-address"> Email Address: </label>
+            <input type="text" name="input-email-address" id="input-email-address">
 
-    <label for="input-last-name"> Last Name: </label>
-    <input type="text" name="input-last-name" id="input-last-name">
+            <label for="input-major"> Major: </label>
+            <input type="text" name="input-major" id="input-major">
 
-    <label for="input-address"> Address: </label>
-    <input type="text" name="input-address" id="input-address">
-
-    <label for="input-email-address"> Email Address: </label>
-    <input type="text" name="input-email-address" id="input-email-address">
-
-    <label for="input-major"> Major: </label>
-    <input type="text" name="input-major" id="input-major">
-
-     <select name="input-chapter-id" id="input-chapter-ajax">
-        <option value=""> Select A Chapter</option>
-        {{#each chapter}}
-        <option value="{{this.chapter_id}}">{{this.chapter_name}}</option>
-        {{/each}}
-    </select>
-    
-    <input type="submit">
-</form>
+            <select name="input-chapter-id" id="input-chapter-ajax">
+                <option value=""> Select A Chapter</option>
+                {{#each chapter}}
+                <option value="{{this.chapter_id}}">{{this.chapter_name}}</option>
+                {{/each}}
+            </select>
+            
+            <input class="orange_button" type="submit">
+        </form>
+    </div>
+</div>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_member.js"></script>

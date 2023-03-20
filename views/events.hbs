@@ -1,70 +1,75 @@
-<h1>GO GREEK</h1>
-<p>All things Fraternity and Sorority Life at Oregon State University!</p>
-<a href="/">Home</a> | <a href="/councils">Councils</a> |
-<a href="/chapters">Chapters</a> | <a href="/members">Members</a> |
-<a href="/positions">Positions</a> | <a href="/events">Philanthropy Events</a> |
-<a href="/chapterphilo">Chapter Philanthropies </a>
+<ul>    
+    <li><a href="/">Home</a></li>
+    <li><a href="/councils">Councils</a></li>
+    <li><a href="/chapters">Chapters</a></li>
+    <li><a href="/members">Members</a></li>
+    <li><a href="/positions">Positions</a></li>
+    <li><a href="/events">Philanthropy Events</a></li>
+    <li><a href="/chapterphilo">Chapter Philanthropies</a></li>
+</ul>
 
-<br>
+<div class="margins">
+    <h2> Philanthropy Events </h2>
 
-<h2> Philanthropy Events </h2>
+    {{!-- Create a table --}}
+    <table id="events-table">
+    {{!-- Header section --}}
+        <thead>
 
-{{!-- Create a table --}}
-<table id="events-table">
-{{!-- Header section --}}
-    <thead>
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>delete</th>
+            </tr>
+        </thead>
 
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the event id, event name, event type, event entry and event status in order --}}
+            {{#each data}}
+            <tr data-value={{this.event_id}}>
+                <td>{{this.event_id}}</td>
+                <td>{{this.event_name}}</td>
+                <td>{{this.event_type}}</td>
+                <td>{{this.event_entry}}</td>
+                <td>{{this.event_status}}</td>
+                <td><button type="button" class="orange_button" onclick="deleteEvents('{{this.event_id}}')">Delete</button></td>
+            </tr>
             {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
+        </tbody>
+    </table>
+    {{!-- Form to add a record to the table using AJAX --}}
 
-    {{!-- Body section --}}
-    <tbody>
+    <div class="form_margins">
+        <h3>Adding a New Philanthropy Event</h3>
+        <p>To add a new philanthropy event, please enter their information below and click 'Submit'!</p>
 
-        {{!-- For each row, print the event id, event name, event type, event entry and event status in order --}}
-        {{#each data}}
-        <tr data-value={{this.event_id}}>
-            <td>{{this.event_id}}</td>
-            <td>{{this.event_name}}</td>
-            <td>{{this.event_type}}</td>
-            <td>{{this.event_entry}}</td>
-            <td>{{this.event_status}}</td>
-             <td><button onclick="deleteEvents('{{this.event_id}}')">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-{{!-- Form to add a record to the table using AJAX --}}
+        {{!-- <form id="add-chapter-philanthropy-form-ajax" method="POST" action="/add_chapterphilo-ajax"> --}}
 
-<h3>Adding a New Philanthropy Event</h3>
-<p>To add a new philanthropy event, please enter their information below and click 'Submit'!</p>
+        <form id="add-event-form-ajax">
 
-{{!-- <form id="add-chapter-philanthropy-form-ajax" method="POST" action="/add_chapterphilo-ajax"> --}}
+            <label for="input-event-name">Event Name: </label>
+            <input type="text" name="input-event-name" id="input-event-name">
 
-<form id="add-event-form-ajax">
+            <label for="input-event-type">Event Type: </label>
+            <input type="text" name="input-event-type" id="input-event-type">
 
-    <label for="input-event-name">Event Name: </label>
-    <input type="text" name="input-event-name" id="input-event-name">
+            <label for="input-event-entry">Event Entry Fee: </label>
+            <input type="number" name="input-event-entry" id="input-event-entry">
 
-    <label for="input-event-type">Event Type: </label>
-    <input type="text" name="input-event-type" id="input-event-type">
+            <label for="input-event-status">Event Status: </label>
+            <input type="text" name="input-event-status" id="input-event-status">
 
-    <label for="input-event-entry">Event Entry Fee: </label>
-    <input type="number" name="input-event-entry" id="input-event-entry">
-
-    <label for="input-event-status">Event Status: </label>
-    <input type="text" name="input-event-status" id="input-event-status">
-
-    <input type="submit">
-</form>
+            <input class="orange_button" type="submit">
+        </form>
+    </div>
+</div>
 
 <script src="./js/add_event.js"></script>
 <script src="./js/delete_event.js"></script>
