@@ -311,7 +311,7 @@ app.post('/add-council-ajax', function(req, res){
 })
 // Route to members ---------------------------------------------------------------------------------------------------
 app.get('/members', function (req, res){ 
-    let query1 = "SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS Chapter FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
+    let query1 = "SELECT member_id, first_name, last_name, address, email_address, major, Chapters.chapter_name AS Chapter_Affiliation FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
     let query2 = "SELECT * FROM Chapters;";
     db.pool.query(query1, function (error, rows, fields) {
         let member = rows;
