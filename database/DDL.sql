@@ -104,7 +104,6 @@ INSERT INTO Positions(position_id, position_name, position_responsibility, membe
 VALUES(01, 'President', 'Leads formal chapter and manages all chapter members', 0001),
 (02, 'Recruitment Director', 'Helps recruit more members for the chapter during Fall Formal Recruitment and COB', 0254),
 (07, 'External Philanthropy', 'Engages the chapter in other chapters philanthropies', 0123),
-(08, 'Internal Philanthropy', 'Plans their chapter philanthropy events', 0311);
 
 --Inserts data into 'Philanthropy_Events'
 INSERT INTO Philanthropy_Events(event_id, event_name, event_type, event_entry, event_status)
