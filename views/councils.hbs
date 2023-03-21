@@ -1,3 +1,11 @@
+{{!--
+Citation for the following code:
+Date: 3/2/2023
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app), specifically steps 5 and 6.
+The code was adapted to implement handlebars for the councils page and more specifically the add function.
+It was adapted to match the entities and attributes of the table along with implementing dropdpown menus for functionality.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
 <ul>    
     <li><a href="/">Home</a></li>
     <li><a href="/councils">Councils</a></li>
@@ -32,7 +40,7 @@
         {{!-- Body section --}}
         <tbody>
 
-            {{!-- For each row, print the chapter philanthropy id, philanthropy role, event id, and chapter id in order --}}
+            {{!-- For each row, print the council id, and council name in order --}}
             {{#each data}}
             <tr data-value={{this.council_id}}>
                 <td>{{this.council_id}}</td>
@@ -43,7 +51,7 @@
     </table>
 
     <div class="form_margins">
-
+        {{!-- Form to add a new council --}}
         <h3>Adding a New Council</h3>
         <p>To add a new council, please enter their information below and click 'Submit'!</p>
 

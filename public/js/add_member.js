@@ -1,3 +1,9 @@
+// Citation for the following code:
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 5 on adding new data.
+// The code was adapted to match the attributes of the members table in order to add new records to the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+
 // Get the objects we need to modify
 let addMemberForm = document.getElementById('add-member-form-ajax');
 
@@ -67,7 +73,7 @@ addMemberForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// Chapter_Philanthropies
+// Members
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -80,7 +86,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 6 cells
     let row = document.createElement("TR");
     let FirstNameCell = document.createElement("TD");
     let LastNameCell = document.createElement("TD");
@@ -88,7 +94,6 @@ addRowToTable = (data) => {
     let EmailAddressCell = document.createElement("TD");
     let MajorCell = document.createElement("TD");
     let ChapterIdCell = document.createElement("TD");
-    //let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     FirstNameCell.innerText = newRow.first_name;
@@ -98,14 +103,7 @@ addRowToTable = (data) => {
     MajorCell.innerText = newRow.major;
     ChapterIdCell.innerText = newRow.chapter_id;
 
-    // deleteCell = document.createElement("button");
-    // deleteCell.innerHTML = "Delete";
-    // deleteCell.onclick = function(){
-    //     deleteChapterPhilanthropies(newRow.id);
-    // };
-
     // Add the cells to the row 
-    //row.appendChild(ChapterPhiloIdCell);
     row.appendChild(FirstNameCell);
     row.appendChild(LastNameCell);
     row.appendChild(AddressCell);
@@ -113,17 +111,8 @@ addRowToTable = (data) => {
     row.appendChild(MajorCell);
     row.appendChild(ChapterIdCell);
 
-    //row.appendChild(deleteCell);
-
     row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row);
-     // Find drop down menu, create a new option, fill data in the option (id),
-    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-    // let selectMenu = document.getElementById("mySelect");
-    // let option = document.createElement("option");
-    // option.text = newRow.chapter_philanthropy_id;
-    // option.value = newRow.chapter_id;
-    // selectMenu.add(option); 
 }

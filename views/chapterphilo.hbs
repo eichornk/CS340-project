@@ -1,8 +1,10 @@
 {{!--
 Citation for the following code:
-// Date: 3/2/2023
-// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+Date: 3/2/2023
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app), specifically steps 5-8.
+The code was adapted to implement handlebars for the chapter philanthropies page and more specifically the add, update, and delete functions 
+that were adapted to match the entities and attributes of the table along with implementing dropdpown menus for functionality.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 --}}
 
 <ul>    
@@ -64,12 +66,6 @@ Citation for the following code:
             <label for="input-philanthropy-role">Philanthropy Role: </label>
             <input type="text" name="input-philanthropy-role" id="input-philanthropy-role">
 
-            {{!-- <label for="input-event-id">Event ID: </label>
-            <input type="number" name="input-event-id" id="input-event-id">
-
-            <label for="input-chapter-id">Chapter ID: </label>
-            <input type="number" name="input-chapter-id" id="input-chapter-id"> --}}
-
             {{! Dropdown for Event Selection}}
             <label for="input-Event">Philanthropy Event: </label>
             <select name="input-Event" id="input-event-ajax">
@@ -93,6 +89,8 @@ Citation for the following code:
     </div>
 
     <div class="form_margins">
+         {{!-- Form to update a record to the table using AJAX --}}
+
         <h3>Updating A Chapter Philanthropy</h3>
         <p>To update a specific chapter's involvement select their chapter philanthropy id from the drop-down menu on the left and the chapter from the drop-down menu on the right</p>
         <form id="update-chapter-philanthropy-form-ajax">

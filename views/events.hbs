@@ -1,3 +1,11 @@
+{{!--
+Citation for the following code:
+Date: 3/2/2023
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app), specifically steps 5-7.
+The code was adapted to implement handlebars for the events page and more specifically the add and delete function.
+It was adapted to match the entities and attributes of the table along with implementing dropdpown menus for functionality.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
 <ul>    
     <li><a href="/">Home</a></li>
     <li><a href="/councils">Councils</a></li>
@@ -44,13 +52,11 @@
             {{/each}}
         </tbody>
     </table>
-    {{!-- Form to add a record to the table using AJAX --}}
 
     <div class="form_margins">
+        {{!-- Form to add a record to the table using AJAX --}}
         <h3>Adding a New Philanthropy Event</h3>
         <p>To add a new philanthropy event, please enter their information below and click 'Submit'!</p>
-
-        {{!-- <form id="add-chapter-philanthropy-form-ajax" method="POST" action="/add_chapterphilo-ajax"> --}}
 
         <form id="add-event-form-ajax">
 

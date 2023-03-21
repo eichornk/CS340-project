@@ -1,3 +1,8 @@
+// Citation for the following code:
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app) specifically step 5 on adding new data.
+// The code was adapted to match the attributes of the chapter table in order to add new records to the table
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Get the objects we need to modify
 let addChapterForm = document.getElementById('add-chapter-form-ajax');
@@ -19,7 +24,6 @@ addChapterForm.addEventListener("submit", function (e) {
     let inputCouncilId = document.getElementById("input-council-ajax");
 
     // Get the values from the form fields
-    //let ChapterPhilanthropyIdValue = inputChapterPhilanthropyId.value;
     let ChapterNameValue = inputChapterName.value;
     let NicknameValue = inputNickname.value;
     let ColorsValue = inputColors.value;
@@ -30,7 +34,6 @@ addChapterForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        //chapter_philanthropy_id: ChapterPhilanthropyIdValue,
         chapter_name: ChapterNameValue,
         nickname: NicknameValue,
         colors: ColorsValue,
@@ -71,9 +74,8 @@ addChapterForm.addEventListener("submit", function (e) {
     location.reload();                        // Reloads the website after user inputs data 
 })
 
-
 // Creates a single row from an Object representing a single record from 
-// Chapter_Philanthropies
+// Chapters
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -86,7 +88,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 7 cells
     let row = document.createElement("TR");
     let ChapterNameCell = document.createElement("TD");
     let NicknameCell = document.createElement("TD");

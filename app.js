@@ -1,6 +1,7 @@
 // Citation for the following code:
-// Date: 3/2/2023
-// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
+// Date: 3/20/2023
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app).
+// The code was adapted to implement queries from the DML file and the tables of the database as far as attribute and entity names. 
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 /*
@@ -31,12 +32,18 @@ app.set('view engine', '.hbs');                             // Tell express to u
     ROUTES
 */
 
-// Route to index 
+/*******************
+ * INDEX/HOME PAGE
+ ******************/
+// Route to index ---------------------------------------------------------------------------------------------------
 app.get('/', function(req, res)
 {
     res.render('index');                                    // Note the call to render() and not send(). Using render() ensures the templating engine
 });                                                         // will process this file, before sending the finished HTML to the client.
 
+/*******************
+ * CHAPTERPHILO
+ ******************/
 // Route to chapterphilo ---------------------------------------------------------------------------------------------------
 app.get('/chapterphilo', function(req, res){
     let query1 = "SELECT chapter_philanthropy_id, philanthropy_role, Philanthropy_Events.event_name as Event, Chapters.chapter_name as Chapter FROM Chapter_Philanthropies INNER JOIN Philanthropy_Events ON Chapter_Philanthropies.event_id = Philanthropy_Events.event_id INNER JOIN Chapters ON Chapter_Philanthropies.chapter_id = Chapters.chapter_id;";
@@ -59,15 +66,14 @@ app.get('/chapterphilo', function(req, res){
     })
 });
 
+// Add to chapterphilo ---------------------------------------------------------------------------------------------------
 app.post('/add-chapterphilo-ajax', function(req, res){
-// Capture the incoming data and parse it back to a JS object
     let data = req.body;
     console.log(data);
     let event = parseInt(data.event_id);
     if (isNaN(event)){
         event = 'NULL'
     };
-
     let chapter = parseInt(data.chapter_id);
     if (isNaN(chapter)){
         chapter = 'NULL'
@@ -88,13 +94,13 @@ app.post('/add-chapterphilo-ajax', function(req, res){
                 }
                 else{
                     res.send(rows);
-                    //could be res.redirect(rows);
                 }
             });
         }
     });  
 });
 
+// Delete from chapterphilo ---------------------------------------------------------------------------------------------------
 app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
     let data = req.body;
     let ChapterPhilanthropyID = parseInt(data.id);
@@ -133,6 +139,7 @@ app.delete('/delete-chapterphilo-ajax/', function(req,res,next){
               }
   })});
 
+// Update chapterphilo ---------------------------------------------------------------------------------------------------
 app.put('/put-chapterphilo-ajax', function(req,res,next){
     let data = req.body;
 
@@ -164,7 +171,10 @@ app.put('/put-chapterphilo-ajax', function(req,res,next){
       }
     })
 });
-  
+
+/*******************
+ * CHAPTERS
+ ******************/
 // Route to chapters ---------------------------------------------------------------------------------------------------
 app.get('/chapters', function (req, res)              
 {
@@ -179,8 +189,8 @@ app.get('/chapters', function (req, res)
      })
 });
 
+// Add to chapters ---------------------------------------------------------------------------------------------------
 app.post('/add-chapter-ajax', function(req, res){
-
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     console.log(data);
@@ -192,21 +202,15 @@ app.post('/add-chapter-ajax', function(req, res){
     let housed = data.housed;
     let address = data.address;
     let councilId = parseInt(data.council_id);
-
     // Create the query and run it on the database
     query1 = `INSERT INTO Chapters (chapter_name, nickname, colors, philanthropy, housed, address, council_id) VALUES ('${chapterName}', '${nickname}', '${colors}', '${philanthropy}', ${housed}, '${address}', ${councilId})`;
     db.pool.query(query1, function(error, rows, fields){
-
         // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
             res.redirect('/');
@@ -214,6 +218,9 @@ app.post('/add-chapter-ajax', function(req, res){
     })
 });
 
+/*******************
+ * EVENTS
+ ******************/
 // Route to events ---------------------------------------------------------------------------------------------------
 app.get('/events', function (req, res)              
 {
@@ -223,6 +230,7 @@ app.get('/events', function (req, res)
         })
 });
 
+// add to events ---------------------------------------------------------------------------------------------------
 app.post('/add-event-ajax', function(req, res){
 
     // Capture the incoming data and parse it back to a JS object
@@ -233,21 +241,15 @@ app.post('/add-event-ajax', function(req, res){
     let EventType = data.event_type;
     let EventEntry = data.event_entry;
     let EventStatus = data.event_status;
-
     // Create the query and run it on the database
     query1 = `INSERT INTO Philanthropy_Events (event_name, event_type, event_entry, event_status) VALUES ('${EventName}', '${EventType}', ${EventEntry}, '${EventStatus}')`;
     db.pool.query(query1, function(error, rows, fields){
-
         // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
             res.redirect('/');
@@ -255,20 +257,18 @@ app.post('/add-event-ajax', function(req, res){
     })
 })
 
+//delete from events ---------------------------------------------------------------------------------------------------
 app.delete('/delete-event-ajax/', function(req,res,next){
     let data = req.body;
     let EventID = parseInt(data.id);
     let deleteEvents= `DELETE FROM Philanthropy_Events WHERE event_id = ?`;
-  
           // Run the 1st query
           db.pool.query(deleteEvents, [EventID], function(error, rows, fields){
               if (error) {
-  
               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
               }
-  
               else
               {
                 res.sendStatus(204);
@@ -276,6 +276,9 @@ app.delete('/delete-event-ajax/', function(req,res,next){
              })
     });
 
+/*******************
+ * COUNCILS
+ ******************/
  // Route to councils ---------------------------------------------------------------------------------------------------
 app.get('/councils', function (req, res)              
 {
@@ -284,33 +287,32 @@ app.get('/councils', function (req, res)
         res.render('councils', { data: rows });         
         })
 });
-app.post('/add-council-ajax', function(req, res){
 
+// Add to councils ---------------------------------------------------------------------------------------------------
+app.post('/add-council-ajax', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     console.log(data);
-
     let CouncilName = data.council_name;
     // Create the query and run it on the database
     query1 = `INSERT INTO Councils (council_name) VALUES ('${CouncilName}')`;
     db.pool.query(query1, function(error, rows, fields){
-
         // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
             res.redirect('/');
         }
     })
 })
+
+/*******************
+ * MEMBERS
+ ******************/
 // Route to members ---------------------------------------------------------------------------------------------------
 app.get('/members', function (req, res){ 
     let query1 = "SELECT member_id, first_name, last_name, Members.address, email_address, major, Chapters.chapter_name AS Chapter_Affiliation FROM Members INNER JOIN Chapters ON Members.chapter_id = Chapters.chapter_id;";
@@ -324,8 +326,8 @@ app.get('/members', function (req, res){
      })
 });
 
+// Add to members ---------------------------------------------------------------------------------------------------
 app.post('/add-member-ajax', function(req, res){
-
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     console.log(data);
@@ -340,17 +342,12 @@ app.post('/add-member-ajax', function(req, res){
     // Create the query and run it on the database
     query1 = `INSERT INTO Members (first_name, last_name, address, email_address, major, chapter_id) VALUES ('${firstName}', '${lastName}', '${address}', '${emailAddress}', '${major}', ${chapterID})`;
     db.pool.query(query1, function(error, rows, fields){
-
         // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
             res.redirect('/');
@@ -358,7 +355,9 @@ app.post('/add-member-ajax', function(req, res){
     })
 })
 
-
+/*******************
+ * POSITIONS
+ ******************/
 // Route to Positions -----------------------------------------------------------------------------------
 app.get('/positions', function (req, res)              
 {
@@ -368,6 +367,7 @@ app.get('/positions', function (req, res)
         })
 });
 
+// Add to Positions -----------------------------------------------------------------------------------
 app.post('/add-position-ajax', function(req, res){
 
     // Capture the incoming data and parse it back to a JS object
@@ -389,16 +389,12 @@ app.post('/add-position-ajax', function(req, res){
             console.log(error)
             res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
             res.redirect('/');
         }
     })
 })
-
 
 /*
     LISTENER
