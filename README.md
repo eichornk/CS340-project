@@ -40,4 +40,23 @@ The app.js file was set up from beginning stages of the nodejs starter app in st
 <li> Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app </li>
 </ul>
 
+For the Navigation bar for our website, we cloesly followed a tutorial from w3schools that helped us implement the skeleton of the navigation bar. We changed it so it would correctly fit the theme of our website. 
+
+<ul>
+<li>Citation for all the .hbs files</li>
+<li>Date: 3/20/2023 </li>
+<li>Closely followed w3schools tutorial </li>
+<li>Implemented this code to create a navigation bar to get to the different webpages </li>
+<li> Source URL: https://www.w3schools.com/css/css_navbar_horizontal.asp </li>
+</ul>
+
+For bootstrap, we looked up how to implement it so we could get the tables to not look like the default tables. We used the table class to make the table larger, table-border class to give the table a border, table-striped to give the table the striped effect of a little darker color every other row, table-hover so when you hover over a row it lights up a little. 
+
+<ul>
+<li>Citation implementing bootstrap on the tables</li>
+<li>Date: 3/20/2023 </li>
+<li>Followed bootstraps tutorials on how to add to the tables</li>
+<li>Implemented the classes the website gave us on the tables </li>
+<li> Source URL: https://getbootstrap.com/docs/4.0/content/tables/ </li>
+</ul>
 
