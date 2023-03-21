@@ -361,10 +361,15 @@ app.post('/add-member-ajax', function(req, res){
 // Route to Positions -----------------------------------------------------------------------------------
 app.get('/positions', function (req, res)              
 {
-    let query1 = "SELECT * FROM Positions;";
+    let query1 = "SELECT position_id, position_name, position_responsibility, Members.member_id AS Member_Position FROM Positions INNER JOIN Members ON Positions.member_id = Members.member_id;";
+    let query2 = "SELECT * FROM Members;"
     db.pool.query(query1, function (error, rows, fields) {
-        res.render('positions', { data: rows });         
-        })
+        let positions = rows;
+        db.pool.query(query2, (error, rows, fields)=> {
+            let member = rows;
+            return res.render('positions', {data: positions, member:member});
+        })      
+     })
 });
 
 // Add to Positions -----------------------------------------------------------------------------------

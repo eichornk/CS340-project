@@ -5,6 +5,9 @@ Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-a
 The code was adapted to implement handlebars for the positions page and more specifically the add function.
 It was adapted to match the entities and attributes of the table along with implementing dropdpown menus for functionality.
 Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+Used information from the bootstrap website to make the tables look better instead of having the default tables
+Source URL: https://getbootstrap.com/docs/4.0/content/tables/
 --}}
 
 <ul>
@@ -67,8 +70,12 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
             <label for="input-position-responsibility"> Position Responsibility: </label>
             <input type="text" name="input-position-responsibility" id="input-position-responsibility">
 
-            <label for="input-member-id"> Member ID: </label>
-            <input type="number" name="input-member-id" id="input-member-id">
+             <select name="input-member-id" id="input-member-ajax">
+                <option value=""> Select A Member </option>
+                {{#each member}}
+                <option value="{{this.member_id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/each}}
+            </select>
 
             <input class="orange_button" type="submit">
         </form>
